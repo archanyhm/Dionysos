@@ -28,13 +28,13 @@ public class ArticleFetchingService
         return inventoryItemDtos;
     }
 
-    private static ArticleDto CreateArticleDto(Article article, IGrouping<DateTime, InventoryItem> articleItemsBestBeforeGroup)
+    private static ArticleDto CreateArticleDto(Article article, IGrouping<DateTime?, InventoryItem> articleItemsBestBeforeGroup)
     {
         var newDto = new ArticleDto
         {
             Ean = article.Ean,
-            Beschreibung = article.Description,
-            Hersteller = article.Vendor,
+            Description = article.Description,
+            Vendor = article.Vendor,
             Name = article.Name,
             BestBefore = articleItemsBestBeforeGroup.Key,
             Quantity = articleItemsBestBeforeGroup.Count()
