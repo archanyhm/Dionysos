@@ -1,5 +1,5 @@
 using System.Text.Json;
-using Dionysos.Models;
+using Dionysos.Dtos;
 using Dionysos.Services;
 using Microsoft.AspNetCore.Mvc;
 

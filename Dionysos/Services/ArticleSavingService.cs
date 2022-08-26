@@ -1,5 +1,5 @@
 using Dionysos.Database;
-using Dionysos.Models;
+using Dionysos.Dtos;
 
 namespace Dionysos.Services;
 
@@ -24,14 +24,6 @@ public class ArticleSavingService
             };
             _dbContext.Articles.Add(newArticle);
         }
-        
-        var inventoryItem = new InventoryItem
-        {
-            Ean = articleDto.Ean,
-            BestBefore = articleDto.BestBefore,
-        };
-        _dbContext.InventoryItems.Add(inventoryItem);
-        
         
         _dbContext.SaveChanges();
     }
