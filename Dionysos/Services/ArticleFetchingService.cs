@@ -5,13 +5,19 @@ namespace Dionysos.Services;
 
 public class ArticleFetchingService
 {
+    private readonly IMainDbContext _dbContext;
+    
+    public ArticleFetchingService(IMainDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
+
     public List<ArticleDto> FetchArticles()
     {
         var inventoryItemDtos = new List<ArticleDto>();
-        
-        var dbContext = new MainDbContext();
-        var articles = dbContext.Articles.ToList();
-        var inventoryItems = dbContext.InventoryItems.ToList();
+
+        var articles = _dbContext.Articles.ToList();
+        var inventoryItems = _dbContext.InventoryItems.ToList();
         foreach (var article in articles)
         {
             var articleItemsBestBeforeGroups = inventoryItems

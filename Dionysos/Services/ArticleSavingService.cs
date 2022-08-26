@@ -5,10 +5,10 @@ namespace Dionysos.Services;
 
 public class ArticleSavingService
 {
-    private MainDbContext _dbContext;
-    public ArticleSavingService()
+    private IMainDbContext _dbContext;
+    public ArticleSavingService(IMainDbContext mainDbContext)
     {
-        _dbContext = new MainDbContext();
+        _dbContext = mainDbContext;
     }
     public void SaveArticle(ArticleDto articleDto)
     {

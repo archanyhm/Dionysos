@@ -4,10 +4,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Dionysos.Database;
 
-public class MainDbContext : DbContext
+public class MainDbContext : DbContext, IMainDbContext
 {
     public DbSet<Article> Articles { get; set; }
     public DbSet<InventoryItem> InventoryItems { get; set; }
+
+    public override int SaveChanges()
+    {
+        return base.SaveChanges();
+    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
