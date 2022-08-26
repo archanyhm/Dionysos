@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Dionysos.Data;
 using Dionysos.Database;
+using Dionysos.GrpcService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddDbContext<MainDbContext>();
+builder.Services.AddGrpc();
 
 var app = builder.Build();
 
@@ -21,13 +23,14 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
 app.UseRouting();
 
 app.MapBlazorHub();
+app.MapGrpcService<PingpongService>();
 app.MapControllers();
 app.MapFallbackToPage("/_Host");
 
