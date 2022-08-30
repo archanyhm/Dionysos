@@ -1,6 +1,7 @@
 using Dionysos.Database;
 using Dionysos.Dtos;
 using Dionysos.Services;
+using Dionysos.Services.InventoryItemServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dionysos.Controllers;
@@ -13,7 +14,7 @@ public class InventoryItemController
     public JsonResult GetInventoryItems()
     {
         var service = new InventoryItemFetchingService();
-        var items = service.FetchArticles();
+        var items = service.FetchItems();
         return new JsonResult(items);
     }
 
@@ -21,7 +22,7 @@ public class InventoryItemController
     public ActionResult PostInventoryItems([FromBody] InventoryItemDto inventoryItemDto)
     {
         var savingService = new InventoryItemSavingService(new MainDbContext());
-        savingService.SaveArticle(inventoryItemDto);
+        savingService.SaveInventoryItem(inventoryItemDto);
         
         return new CreatedResult("", null);
     }
