@@ -1,22 +1,26 @@
+using Dionysos.Database;
 using Dionysos.Dtos;
 using Dionysos.Services.ArticleServices;
 using DionysosProtobuf;
 using Grpc.Core;
+using Article = DionysosProtobuf.Article;
 
 namespace Dionysos.GrpcService;
 
 public class ArticleCrudService : DionysosProtobuf.ArticleCrudService.ArticleCrudServiceBase
 {
+    private readonly MainDbContext _mainDbContext = new MainDbContext();
+
     public override Task<BooleanReply> CreateArticle(Article request, ServerCallContext context)
     {
-        var articleSavingService = new ArticleSavingService();
+        var articleSavingService = new ArticleSavingService(_mainDbContext);
         articleSavingService.SaveArticle(ArticleDtoToProtobufArticle(request));
         return CreateSuccessResult();
     }
 
     public override Task<Article> ReadArticle(SimpleArticleRequest request, ServerCallContext context)
     {
-        var articleFetchingService = new ArticleFetchingService();
+        var articleFetchingService = new ArticleFetchingService(_mainDbContext);
         var articleDto = articleFetchingService.FetchArticle(request.Ean);
         var protobufArticle = ArticleDtoToProtobufArticle(articleDto);
         return Task.FromResult(protobufArticle);
@@ -24,7 +28,7 @@ public class ArticleCrudService : DionysosProtobuf.ArticleCrudService.ArticleCru
 
     public override Task<ArticlesReply> GetAllArticles(EmptyRequest request, ServerCallContext context)
     {
-        var articleFetchingService = new ArticleFetchingService();
+        var articleFetchingService = new ArticleFetchingService(_mainDbContext);
         var articleResultList = articleFetchingService
             .FetchArticles()
             .Select(ArticleDtoToProtobufArticle)
@@ -35,14 +39,14 @@ public class ArticleCrudService : DionysosProtobuf.ArticleCrudService.ArticleCru
     
     public override Task<BooleanReply> UpdateArticle(Article request, ServerCallContext context)
     {
-        var articleSavingService = new ArticleSavingService();
+        var articleSavingService = new ArticleSavingService(_mainDbContext);
         articleSavingService.UpdateArticle(ArticleDtoToProtobufArticle(request));
         return CreateSuccessResult();
     }
 
     public override Task<BooleanReply> DeleteArticle(SimpleArticleRequest request, ServerCallContext context)
     {
-        var service = new ArticleDeletionService();
+        var service = new ArticleDeletionService(_mainDbContext);
         service.DeleteArticle(request.Ean);
         
         return CreateSuccessResult();

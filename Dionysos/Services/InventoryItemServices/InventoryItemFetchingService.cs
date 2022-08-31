@@ -5,11 +5,11 @@ namespace Dionysos.Services.InventoryItemServices;
 
 public class InventoryItemFetchingService
 {
-    private MainDbContext _dbContext;
+    private readonly IMainDbContext _dbContext;
 
-    public InventoryItemFetchingService()
+    public InventoryItemFetchingService(IMainDbContext dbContext)
     {
-        _dbContext = new MainDbContext();
+        _dbContext = dbContext;
     }
 
     public List<InventoryItemDto> FetchItems()

@@ -9,9 +9,11 @@ namespace Dionysos.GrpcService;
 
 public class InventoryItemCrudService : DionysosProtobuf.ItemCrudService.ItemCrudServiceBase
 {
+    private readonly MainDbContext _mainDbContext = new MainDbContext();
+
     public override Task<BooleanReply> CreateItem(Item request, ServerCallContext context)
     {
-        var service = new InventoryItemSavingService(new MainDbContext());
+        var service = new InventoryItemSavingService(_mainDbContext);
         service.SaveInventoryItem(ProtobufItemToItemDto(request));
         
         return CreateSuccessResult();
@@ -19,28 +21,28 @@ public class InventoryItemCrudService : DionysosProtobuf.ItemCrudService.ItemCru
 
     public override Task<Item> ReadItem(SimpleItemRequest request, ServerCallContext context)
     {
-        var itemDto = new InventoryItemFetchingService().FetchItem(request.Id);
+        var itemDto = new InventoryItemFetchingService(_mainDbContext).FetchItem(request.Id);
         var protobufItem = ItemDtoToProtobufItem(itemDto);
         return Task.FromResult(protobufItem);
     }
 
     public override Task<ItemsReply> GetAllItems(EmptyRequest request, ServerCallContext context)
     {
-        var service = new InventoryItemFetchingService();
+        var service = new InventoryItemFetchingService(_mainDbContext);
         var items = service.FetchItems().Select(ItemDtoToProtobufItem).ToList();
         return Task.FromResult(new ItemsReply{Items = { items }});
     }
 
     public override Task<BooleanReply> UpdateItem(Item request, ServerCallContext context)
     {
-        var service = new InventoryItemSavingService(new MainDbContext());
+        var service = new InventoryItemSavingService(_mainDbContext);
         service.UpdateInventoryItem(ProtobufItemToItemDto(request));
         return CreateSuccessResult();
     }
 
     public override Task<BooleanReply> DeleteItem(SimpleItemRequest request, ServerCallContext context)
     {
-        new InventoryItemDeletingService().DeleteInventoryItem(request.Id);
+        new InventoryItemDeletingService(_mainDbContext).DeleteInventoryItem(request.Id);
         return CreateSuccessResult();
     }
     

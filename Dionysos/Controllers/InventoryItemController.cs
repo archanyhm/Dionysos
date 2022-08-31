@@ -13,7 +13,7 @@ public class InventoryItemController
     [HttpGet]
     public JsonResult GetInventoryItems()
     {
-        var service = new InventoryItemFetchingService();
+        var service = new InventoryItemFetchingService(new MainDbContext());
         var items = service.FetchItems();
         return new JsonResult(items);
     }

@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Dionysos.Database;
 using Dionysos.Dtos;
 using Dionysos.Services;
 using Dionysos.Services.ArticleServices;
@@ -13,7 +14,7 @@ public class ArticleController
     [HttpGet]
     public JsonResult GetArticles()
     {
-        var service = new ArticleFetchingService();
+        var service = new ArticleFetchingService(new MainDbContext());
         var articles = service.FetchArticles();
         return new JsonResult(articles);
     }
@@ -21,7 +22,7 @@ public class ArticleController
     [HttpPost]
     public ActionResult PostArticle([FromBody] ArticleDto articleDto)
     {
-        var savingService = new ArticleSavingService();
+        var savingService = new ArticleSavingService(new MainDbContext());
         savingService.SaveArticle(articleDto);
         
         return new CreatedResult("", null);

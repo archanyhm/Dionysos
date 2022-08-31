@@ -6,11 +6,11 @@ namespace Dionysos.Services.ArticleServices;
 
 public class ArticleDeletionService
 {
-    private MainDbContext _dbContext;
+    private readonly IMainDbContext _dbContext;
 
-    public ArticleDeletionService()
+    public ArticleDeletionService(IMainDbContext mainDbContext)
     {
-        _dbContext = new MainDbContext();
+        _dbContext = mainDbContext;
     }
 
     public void DeleteArticle(string ean)

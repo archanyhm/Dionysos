@@ -4,11 +4,11 @@ namespace Dionysos.Services.InventoryItemServices;
 
 public class InventoryItemDeletingService
 {
-    private readonly MainDbContext _dbContext;
+    private readonly IMainDbContext _dbContext;
 
-    public InventoryItemDeletingService()
+    public InventoryItemDeletingService(IMainDbContext mainDbContext)
     {
-        _dbContext = new MainDbContext();
+        _dbContext = mainDbContext;
     }
 
     public void DeleteInventoryItem(int id)

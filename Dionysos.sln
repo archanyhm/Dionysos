@@ -20,5 +20,7 @@ Global
 		{090C1645-D1F9-4BE8-881C-FB9F652B2126}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{090C1645-D1F9-4BE8-881C-FB9F652B2126}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{090C1645-D1F9-4BE8-881C-FB9F652B2126}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F911B7B-BC87-4FCD-A8EB-6D38B77018B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F911B7B-BC87-4FCD-A8EB-6D38B77018B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal

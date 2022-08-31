@@ -8,51 +8,52 @@ using Xunit;
 
 namespace Dionysos.API.Tests.ArticleSavingServiceTests;
 
-public class SaveArticleTests
+public class UpdateArticleTests
 {
-    #region TestData
+     #region TestData
 
-    private static readonly Article Article1 = new() {Ean = "1", Description = "someDesc", Name = "someName", Vendor = "someVendor",};
-    private readonly ArticleDto _articleDto1 = new() {Ean = "1", Description = "someDesc", Name = "someName", Vendor = "someVendor"};
+    private static readonly Article SomeArticle = new() {Ean = "1", Description = "someDesc", Name = "someName", Vendor = "someVendor",};
+    private readonly ArticleDto _articleDto = new() {Ean = "1", Description = "someDesc", Name = "someName", Vendor = "someVendor"};
 
     #endregion
     
     [Fact]
-    public void NewData_DbContextSaveMethodGetsCalled()
+    public void SaveChangesGetsCalled()
     {
         var dbContextMock = new Mock<IMainDbContext>();
-        SetupMock(dbContextMock);
-
-        var classUnderTest = new ArticleSavingService(dbContextMock.Object);
-        classUnderTest.SaveArticle(_articleDto1);
+        SetupMock(dbContextMock, SomeArticle);
+        
+        var mainDbContext = dbContextMock.Object;
+        var classUnderTest = new ArticleSavingService(mainDbContext);
+        classUnderTest.UpdateArticle(_articleDto);
         
         dbContextMock.Verify(x => x.SaveChanges(), Times.Once);
     }
 
+    // [Fact]
+    // public void NotExistingData_NotUpdated()
+    // {
+    //     var dbContextMock = new Mock<IMainDbContext>();
+    //     SetupMock(dbContextMock);
+    //
+    //     var mainDbContext = dbContextMock.Object;
+    //     var classUnderTest = new ArticleSavingService(mainDbContext);
+    //     classUnderTest.UpdateArticle(_articleDto);
+    //     
+    //     dbContextMock.Verify(x => x.Articles.Update(It.IsAny<Article>()), Times.Never);
+    // }
+
     [Fact]
-    public void NewData_NewArticleAdded()
+    public void AlreadyExsistingPk_ArticleUpdated()
     {
         var dbContextMock = new Mock<IMainDbContext>();
-        SetupMock(dbContextMock);
-
-        var mainDbContext = dbContextMock.Object;
-        var classUnderTest = new ArticleSavingService(mainDbContext);
-        classUnderTest.SaveArticle(_articleDto1);
-        
-        dbContextMock.Verify(x => x.Articles.Add(It.IsAny<Article>()), Times.Once);
-    }
-
-    [Fact]
-    public void AlreadyExsistingPk_NoNewArticle()
-    {
-        var dbContextMock = new Mock<IMainDbContext>();
-        SetupMock(dbContextMock, Article1);
+        SetupMock(dbContextMock, SomeArticle);
         
         var mainDbContext = dbContextMock.Object;
         var classUnderTest = new ArticleSavingService(mainDbContext);
-        classUnderTest.SaveArticle(_articleDto1);
+        classUnderTest.UpdateArticle(_articleDto);
         
-        dbContextMock.Verify(x => x.Articles.Add(It.IsAny<Article>()), Times.Never);
+        dbContextMock.Verify(x => x.Articles.Update(It.IsAny<Article>()), Times.Once);
     }
     
     #region DbSetMock
@@ -76,5 +77,4 @@ public class SaveArticleTests
     }
 
     #endregion
-
 }

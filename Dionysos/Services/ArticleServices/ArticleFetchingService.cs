@@ -5,11 +5,11 @@ namespace Dionysos.Services.ArticleServices;
 
 public class ArticleFetchingService
 {
-    private MainDbContext _dbContext;
+    private readonly IMainDbContext _dbContext;
 
-    public ArticleFetchingService()
+    public ArticleFetchingService(IMainDbContext mainDbContext)
     {
-        _dbContext = new MainDbContext();
+        _dbContext = mainDbContext;
     }
 
     public List<ArticleDto> FetchArticles()
@@ -31,7 +31,12 @@ public class ArticleFetchingService
                 Vendor = x.Vendor
             })
             .SingleOrDefault();
-        return article ?? new ArticleDto();
+
+        if (article is null)
+        {
+            article = new ArticleDto();
+        }
+        return article ;
     }
 
     private ArticleDto CreateArticleDto(Article article)

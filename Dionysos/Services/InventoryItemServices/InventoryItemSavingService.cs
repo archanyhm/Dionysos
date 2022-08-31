@@ -5,9 +5,9 @@ namespace Dionysos.Services.InventoryItemServices;
 
 public class InventoryItemSavingService
 {
-    private readonly MainDbContext _mainDbContext;
+    private readonly IMainDbContext _mainDbContext;
 
-    public InventoryItemSavingService(MainDbContext mainDbContext)
+    public InventoryItemSavingService(IMainDbContext mainDbContext)
     {
         _mainDbContext = mainDbContext;
     }
