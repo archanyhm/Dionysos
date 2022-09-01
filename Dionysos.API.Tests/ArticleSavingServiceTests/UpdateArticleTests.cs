@@ -12,8 +12,8 @@ public class UpdateArticleTests
 {
      #region TestData
 
-    private static readonly Article SomeArticle = new() {Ean = "1", Description = "someDesc", Name = "someName", Vendor = "someVendor",};
-    private readonly ArticleDto _articleDto = new() {Ean = "1", Description = "someDesc", Name = "someName", Vendor = "someVendor"};
+    private static readonly Article SomeArticle = new() {Ean = "1", Description = "someDesc", Name = "someName", VendorId = 1,};
+    private readonly ArticleDto _articleDto = new() {Ean = "1", Description = "someDesc", Name = "someName", VendorId = 1};
 
     #endregion
     

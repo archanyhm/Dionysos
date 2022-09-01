@@ -6,52 +6,74 @@ import "google/protobuf/timestamp.proto";
 
 service ArticleCrudService {
   rpc CreateArticle (Article) returns (BooleanReply);
-  rpc ReadArticle (SimpleArticleRequest) returns (Article);
+  rpc ReadArticle (SimpleArticle) returns (Article);
   rpc GetAllArticles (EmptyRequest) returns (ArticlesReply);
   rpc UpdateArticle (Article) returns (BooleanReply);
-  rpc DeleteArticle (SimpleArticleRequest) returns (BooleanReply);
+  rpc DeleteArticle (SimpleArticle) returns (BooleanReply);
 }
 
-service ItemCrudService{
+service ItemCrudService {
   rpc CreateItem (Item) returns (BooleanReply);
-  rpc ReadItem (SimpleItemRequest) returns (Item);
+  rpc ReadItem (SimpleItem) returns (Item);
   rpc GetAllItems (EmptyRequest) returns (ItemsReply);
   rpc UpdateItem (Item) returns (BooleanReply);
-  rpc DeleteItem (SimpleItemRequest) returns (BooleanReply);
+  rpc DeleteItem (SimpleItem) returns (BooleanReply);
 }
 
-message EmptyRequest{
+service VendorCrudService {
+  rpc CreateVendor (Vendor) returns (BooleanReply);
+  rpc ReadVendor (SimpleVendor) returns (Vendor);
+  rpc GetAllVendors (EmptyRequest) returns (VendorsReply);
+  rpc UpdateVendor (Vendor) returns (BooleanReply);
+  rpc DeleteVendor (SimpleVendor) returns (BooleanReply);
 }
 
-message BooleanReply{
+message EmptyRequest {
+}
+
+message BooleanReply {
   bool success = 1;
 }
 
-message Article{
+message Article {
   string ean = 1;
   string name = 2;
   string description = 3;
-  string vendor = 4;
+  int32 vendor_id = 4;
 }
 
-message SimpleArticleRequest{
+message SimpleArticle {
   string ean = 1;
 }
 
-message ArticlesReply{
+message ArticlesReply {
   repeated Article articles = 1;
 }
 
 message Item {
   int32 id = 1;
-  google.protobuf.Timestamp bestBefore = 2;
+  google.protobuf.Timestamp best_before = 2;
   string Ean = 3;
 }
 
-message SimpleItemRequest{
+message SimpleItem {
   int32 id = 1;
 }
 
-message ItemsReply{
+message ItemsReply {
   repeated Item items = 1;
+}
+
+message Vendor {
+  int32 id = 1;
+  string name = 2;
+  string country_code = 3;
+}
+
+message SimpleVendor {
+  int32 id = 1;
+}
+
+message VendorsReply {
+  repeated Vendor vendors = 1;
 }

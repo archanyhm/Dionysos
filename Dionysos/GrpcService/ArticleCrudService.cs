@@ -18,7 +18,7 @@ public class ArticleCrudService : DionysosProtobuf.ArticleCrudService.ArticleCru
         return CreateSuccessResult();
     }
 
-    public override Task<Article> ReadArticle(SimpleArticleRequest request, ServerCallContext context)
+    public override Task<Article> ReadArticle(SimpleArticle request, ServerCallContext context)
     {
         var articleFetchingService = new ArticleFetchingService(_mainDbContext);
         var articleDto = articleFetchingService.FetchArticle(request.Ean);
@@ -44,7 +44,7 @@ public class ArticleCrudService : DionysosProtobuf.ArticleCrudService.ArticleCru
         return CreateSuccessResult();
     }
 
-    public override Task<BooleanReply> DeleteArticle(SimpleArticleRequest request, ServerCallContext context)
+    public override Task<BooleanReply> DeleteArticle(SimpleArticle request, ServerCallContext context)
     {
         var service = new ArticleDeletionService(_mainDbContext);
         service.DeleteArticle(request.Ean);
@@ -64,7 +64,7 @@ public class ArticleCrudService : DionysosProtobuf.ArticleCrudService.ArticleCru
             Ean = articleDto.Ean, 
             Name = articleDto.Name, 
             Description = articleDto.Description, 
-            Vendor = articleDto.Vendor 
+            VendorId = articleDto.VendorId 
         };
     }
     
@@ -75,7 +75,7 @@ public class ArticleCrudService : DionysosProtobuf.ArticleCrudService.ArticleCru
             Ean = protobufArticle.Ean, 
             Name = protobufArticle.Name, 
             Description = protobufArticle.Description, 
-            Vendor = protobufArticle.Vendor 
+            VendorId = protobufArticle.VendorId
         };
     }
 }

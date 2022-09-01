@@ -19,7 +19,7 @@ public class InventoryItemCrudService : DionysosProtobuf.ItemCrudService.ItemCru
         return CreateSuccessResult();
     }
 
-    public override Task<Item> ReadItem(SimpleItemRequest request, ServerCallContext context)
+    public override Task<Item> ReadItem(SimpleItem request, ServerCallContext context)
     {
         var itemDto = new InventoryItemFetchingService(_mainDbContext).FetchItem(request.Id);
         var protobufItem = ItemDtoToProtobufItem(itemDto);
@@ -40,7 +40,7 @@ public class InventoryItemCrudService : DionysosProtobuf.ItemCrudService.ItemCru
         return CreateSuccessResult();
     }
 
-    public override Task<BooleanReply> DeleteItem(SimpleItemRequest request, ServerCallContext context)
+    public override Task<BooleanReply> DeleteItem(SimpleItem request, ServerCallContext context)
     {
         new InventoryItemDeletingService(_mainDbContext).DeleteInventoryItem(request.Id);
         return CreateSuccessResult();

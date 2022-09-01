@@ -28,7 +28,7 @@ public class ArticleSavingService
             Ean = articleDto.Ean,
             Description = articleDto.Description,
             Name = articleDto.Name,
-            Vendor = articleDto.Vendor
+            VendorId = articleDto.VendorId
         };
     }
 

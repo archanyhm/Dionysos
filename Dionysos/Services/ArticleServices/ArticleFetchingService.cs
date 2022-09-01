@@ -28,7 +28,7 @@ public class ArticleFetchingService
                 Ean = x.Ean,
                 Name = x.Name,
                 Description = x.Description,
-                Vendor = x.Vendor
+                VendorId = x.VendorId
             })
             .SingleOrDefault();
 
@@ -45,7 +45,7 @@ public class ArticleFetchingService
         {
             Ean = article.Ean,
             Description = article.Description,
-            Vendor = article.Vendor,
+            VendorId = article.VendorId,
             Name = article.Name
         };
         return newDto;

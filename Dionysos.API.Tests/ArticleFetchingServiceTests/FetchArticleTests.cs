@@ -16,10 +16,10 @@ public class FetchArticleTests
 
     private const string Article1Ean = "1";
 
-    private static readonly Article Article1 = new() {Ean = Article1Ean, Description = "someDesc1", Name = "someName1", Vendor = "someVendor1",};
-    private static readonly Article Article2 = new() {Ean = "2", Description = "someDesc2", Name = "someName2", Vendor = "someVendor2",};
+    private static readonly Article Article1 = new() {Ean = Article1Ean, Description = "someDesc1", Name = "someName1", VendorId = 1,};
+    private static readonly Article Article2 = new() {Ean = "2", Description = "someDesc2", Name = "someName2", VendorId = 2,};
     
-    private readonly ArticleDto _expectedArticleDto1 = new() { Description = "someDesc1", Ean = Article1Ean, Name = "someName1", Vendor = "someVendor1" };
+    private readonly ArticleDto _expectedArticleDto1 = new() { Description = "someDesc1", Ean = Article1Ean, Name = "someName1", VendorId = 1 };
     private readonly ArticleDto _emptyArticleDto = new();
 
     #endregion
