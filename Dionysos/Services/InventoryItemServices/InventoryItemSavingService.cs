@@ -14,8 +14,7 @@ public class InventoryItemSavingService
     }
     public void SaveInventoryItem(InventoryItemDto inventoryItemDto)
     {
-        var isItemAlreadyKnown = _mainDbContext.InventoryItems.Any(x => x.Id == inventoryItemDto.Id);
-        if (!isItemAlreadyKnown)
+        if (!IsItemAlreadyKnown(inventoryItemDto))
         {
             var newItem = inventoryItemDto.ToDbInventoryItem();
             _mainDbContext.InventoryItems.Add(newItem);
@@ -26,7 +25,15 @@ public class InventoryItemSavingService
 
     public void UpdateInventoryItem(InventoryItemDto inventoryItemDto)
     {
-        _mainDbContext.InventoryItems.Update(inventoryItemDto.ToDbInventoryItem());
+        if (IsItemAlreadyKnown(inventoryItemDto))
+        {
+            _mainDbContext.InventoryItems.Update(inventoryItemDto.ToDbInventoryItem());
+        }
         _mainDbContext.SaveChanges();
+    }
+    
+    private bool IsItemAlreadyKnown(InventoryItemDto inventoryItemDto)
+    {
+        return _mainDbContext.InventoryItems.Any(x => x.Id == inventoryItemDto.Id);
     }
 }

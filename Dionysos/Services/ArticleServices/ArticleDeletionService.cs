@@ -14,9 +14,12 @@ public class ArticleDeletionService
     public void DeleteArticle(string ean)
     {
         var article = _dbContext.Articles
-            .Single(x => x.Ean == ean);
+            .SingleOrDefault(x => x.Ean == ean);
 
-        _dbContext.Articles.Remove(article);
+        if (article is not null)
+        {
+            _dbContext.Articles.Remove(article);
+        }
         _dbContext.SaveChanges();
     }
 }

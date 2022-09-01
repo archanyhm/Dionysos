@@ -1,5 +1,6 @@
 using Dionysos.Database;
 using Dionysos.Dtos;
+using Dionysos.Extensions;
 
 namespace Dionysos.Services.VendorServices;
 
@@ -11,31 +12,29 @@ public class VendorSavingService
     {
         _mainDbContext = mainDbContext;
     }
+    
     public void SaveVendor(VendorDto vendorDto)
     {
-        var isItemAlreadyKnown = _mainDbContext.Vendors.Any(x => x.Id == vendorDto.Id);
-        if (!isItemAlreadyKnown)
+        if (!IsItemAlreadyKnown(vendorDto))
         {
-            var newItem = CreateDbVendor(vendorDto);
+            var newItem = vendorDto.ToDbVendor();
             _mainDbContext.Vendors.Add(newItem);
         }
         
         _mainDbContext.SaveChanges();
     }
 
-    private static Vendor CreateDbVendor(VendorDto vendorDto)
-    {
-        return new Vendor
-        {
-            Id = vendorDto.Id,
-            Name = vendorDto.Name,
-            CountryCode = vendorDto.CountryCode
-        };
-    }
-
     public void UpdateVendor(VendorDto vendorDto)
     {
-        _mainDbContext.Vendors.Update(CreateDbVendor(vendorDto));
+        if (IsItemAlreadyKnown(vendorDto))
+        {
+            _mainDbContext.Vendors.Update(vendorDto.ToDbVendor());
+        }
         _mainDbContext.SaveChanges();
+    }
+    
+    private bool IsItemAlreadyKnown(VendorDto vendorDto)
+    {
+        return _mainDbContext.Vendors.Any(x => x.Id == vendorDto.Id);
     }
 }

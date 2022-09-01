@@ -1,5 +1,6 @@
 using Dionysos.Database;
 using Dionysos.Dtos;
+using Dionysos.Extensions;
 
 namespace Dionysos.Services.VendorServices;
 
@@ -16,27 +17,16 @@ public class VendorFetchingService
     {
         var items = _dbContext.Vendors.ToList();
 
-        return items.Select(CreateVendorDto).ToList();
+        return items.Select(x => x.ToVendorDto()).ToList();
     }
 
     public VendorDto FetchVendor(int id)
     {
         var item = _dbContext.Vendors
             .Where(x => x.Id == id)
-            .Select(x => CreateVendorDto(x))
+            .Select(x => x.ToVendorDto())
             .SingleOrDefault() ?? new VendorDto();
         return item;
     }
     
-    private VendorDto CreateVendorDto(Vendor vendor)
-    {
-        var newVendorDto = new VendorDto()
-        {
-            Id = vendor.Id,
-            Name = vendor.Name,
-            CountryCode = vendor.Name
-        };
-        
-        return newVendorDto;
-    }
 }
