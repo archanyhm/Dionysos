@@ -1,5 +1,6 @@
 using Dionysos.Database;
 using Dionysos.Dtos;
+using Dionysos.Extensions;
 
 namespace Dionysos.Services.InventoryItemServices;
 
@@ -16,32 +17,15 @@ public class InventoryItemFetchingService
     {
         var items = _dbContext.InventoryItems.ToList();
 
-        return items.Select(CreateInventoryItemDto).ToList();
+        return items.Select(InventoryItemExtensions.ToInventoryItemDto).ToList();
     }
 
     public InventoryItemDto FetchItem(int id)
     {
         var item = _dbContext.InventoryItems
             .Where(x => x.Id == id)
-            .Select(x => new InventoryItemDto()
-            {
-                Id = x.Id,
-                BestBefore = x.BestBefore,
-                Ean = x.Ean,
-            })
+            .Select(x => x.ToInventoryItemDto())
             .SingleOrDefault();
         return item ?? new InventoryItemDto();
-    }
-    
-    private InventoryItemDto CreateInventoryItemDto(InventoryItem item)
-    {
-        var newInventoryItemDto = new InventoryItemDto()
-        {
-            Ean = item.Ean,
-            Id = item.Id,
-            BestBefore = item.BestBefore
-        };
-        
-        return newInventoryItemDto;
     }
 }

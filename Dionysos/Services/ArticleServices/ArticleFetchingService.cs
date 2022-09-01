@@ -1,5 +1,6 @@
 using Dionysos.Database;
 using Dionysos.Dtos;
+using Dionysos.Extensions;
 
 namespace Dionysos.Services.ArticleServices;
 
@@ -16,38 +17,16 @@ public class ArticleFetchingService
     {
         var articles = _dbContext.Articles.ToList();
 
-        return articles.Select(CreateArticleDto).ToList();
+        return articles.Select(x => x.ToArticleDto()).ToList();
     }
 
     public ArticleDto FetchArticle(string ean)
     {
         var article = _dbContext.Articles
             .Where(x => x.Ean == ean)
-            .Select(x => new ArticleDto
-            {
-                Ean = x.Ean,
-                Name = x.Name,
-                Description = x.Description,
-                VendorId = x.VendorId
-            })
-            .SingleOrDefault();
+            .Select(x => x.ToArticleDto())
+            .SingleOrDefault() ?? new ArticleDto();
 
-        if (article is null)
-        {
-            article = new ArticleDto();
-        }
         return article ;
-    }
-
-    private ArticleDto CreateArticleDto(Article article)
-    {
-        var newDto = new ArticleDto
-        {
-            Ean = article.Ean,
-            Description = article.Description,
-            VendorId = article.VendorId,
-            Name = article.Name
-        };
-        return newDto;
     }
 }

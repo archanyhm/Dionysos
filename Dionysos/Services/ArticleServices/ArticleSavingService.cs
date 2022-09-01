@@ -1,5 +1,6 @@
 using Dionysos.Database;
 using Dionysos.Dtos;
+using Dionysos.Extensions;
 
 namespace Dionysos.Services.ArticleServices;
 
@@ -15,26 +16,15 @@ public class ArticleSavingService
         var articleAlreadyKnown = _dbContext.Articles.Any(x => x.Ean == articleToAdd.Ean);
         if (!articleAlreadyKnown)
         {
-            var newArticle = CreateDBArticle(articleToAdd);
+            var newArticle = articleToAdd.ToDbArticle();
             _dbContext.Articles.Add(newArticle);
         }
         _dbContext.SaveChanges();
     }
 
-    private static Article CreateDBArticle(ArticleDto articleDto)
-    {
-        return new Article
-        {
-            Ean = articleDto.Ean,
-            Description = articleDto.Description,
-            Name = articleDto.Name,
-            VendorId = articleDto.VendorId
-        };
-    }
-
     public void UpdateArticle(ArticleDto articleToChange)
     {
-        _dbContext.Articles.Update(CreateDBArticle(articleToChange));
+        _dbContext.Articles.Update(articleToChange.ToDbArticle());
         _dbContext.SaveChanges();
     }
 }

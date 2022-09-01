@@ -1,5 +1,5 @@
 using Dionysos.Database;
-using Dionysos.Dtos;
+using Dionysos.Extensions;
 using Dionysos.Services.ArticleServices;
 using DionysosProtobuf;
 using Grpc.Core;
@@ -14,7 +14,7 @@ public class ArticleCrudService : DionysosProtobuf.ArticleCrudService.ArticleCru
     public override Task<BooleanReply> CreateArticle(Article request, ServerCallContext context)
     {
         var articleSavingService = new ArticleSavingService(_mainDbContext);
-        articleSavingService.SaveArticle(ArticleDtoToProtobufArticle(request));
+        articleSavingService.SaveArticle(request.ToArticleDto());
         return CreateSuccessResult();
     }
 
@@ -22,7 +22,7 @@ public class ArticleCrudService : DionysosProtobuf.ArticleCrudService.ArticleCru
     {
         var articleFetchingService = new ArticleFetchingService(_mainDbContext);
         var articleDto = articleFetchingService.FetchArticle(request.Ean);
-        var protobufArticle = ArticleDtoToProtobufArticle(articleDto);
+        var protobufArticle = articleDto.ToProtobufArticle();
         return Task.FromResult(protobufArticle);
     }
 
@@ -31,7 +31,7 @@ public class ArticleCrudService : DionysosProtobuf.ArticleCrudService.ArticleCru
         var articleFetchingService = new ArticleFetchingService(_mainDbContext);
         var articleResultList = articleFetchingService
             .FetchArticles()
-            .Select(ArticleDtoToProtobufArticle)
+            .Select(ArticleExtensions.ToProtobufArticle)
             .ToList();
 
         return Task.FromResult(new ArticlesReply{Articles = { articleResultList }});
@@ -40,7 +40,7 @@ public class ArticleCrudService : DionysosProtobuf.ArticleCrudService.ArticleCru
     public override Task<BooleanReply> UpdateArticle(Article request, ServerCallContext context)
     {
         var articleSavingService = new ArticleSavingService(_mainDbContext);
-        articleSavingService.UpdateArticle(ArticleDtoToProtobufArticle(request));
+        articleSavingService.UpdateArticle(request.ToArticleDto());
         return CreateSuccessResult();
     }
 
@@ -55,27 +55,5 @@ public class ArticleCrudService : DionysosProtobuf.ArticleCrudService.ArticleCru
     private static Task<BooleanReply> CreateSuccessResult()
     {
         return Task.FromResult(new BooleanReply{Success = true});
-    }
-    
-    private static Article ArticleDtoToProtobufArticle(ArticleDto articleDto)
-    {
-        return new Article 
-        { 
-            Ean = articleDto.Ean, 
-            Name = articleDto.Name, 
-            Description = articleDto.Description, 
-            VendorId = articleDto.VendorId 
-        };
-    }
-    
-    private static ArticleDto ArticleDtoToProtobufArticle(Article protobufArticle)
-    {
-        return new ArticleDto
-        { 
-            Ean = protobufArticle.Ean, 
-            Name = protobufArticle.Name, 
-            Description = protobufArticle.Description, 
-            VendorId = protobufArticle.VendorId
-        };
     }
 }
