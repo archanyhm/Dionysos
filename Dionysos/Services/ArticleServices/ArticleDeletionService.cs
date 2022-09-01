@@ -1,6 +1,4 @@
-using System.Data;
 using Dionysos.Database;
-using Microsoft.EntityFrameworkCore;
 
 namespace Dionysos.Services.ArticleServices;
 
