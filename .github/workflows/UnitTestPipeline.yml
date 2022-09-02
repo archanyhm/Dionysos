@@ -12,4 +12,3 @@ jobs:
           dotnet-version: '6.x'
       - name: Test Dionysos.sln
         run: dotnet test 
-        working-directory: src
