@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Dionysos.Database;
@@ -13,15 +14,13 @@ namespace Dionysos.API.Tests.ArticleFetchingServiceTests;
 public class FetchArticleTests
 {
     [Fact]
-    public void ArticleNotInDb_EmptyArticle()
+    public void ArticleNotInDb_ExceptionThrown()
     {
-        var expected = _emptyArticleDto;
         var dbContextMock = GetDbMock();
 
         var classUnderTest = new ArticleFetchingService(dbContextMock.Object);
-        var actual = classUnderTest.FetchArticle("I do not exist");
 
-        actual.Should().BeEquivalentTo(expected);
+        Assert.Throws<InvalidOperationException>(()=> classUnderTest.FetchArticle("I do not exist"));
     }
 
     [Fact]
