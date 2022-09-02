@@ -31,7 +31,7 @@ public class ArticleCrudService : DionysosProtobuf.ArticleCrudService.ArticleCru
         var articleFetchingService = new ArticleFetchingService(_mainDbContext);
         var articleResultList = articleFetchingService
             .FetchArticles()
-            .Select(ArticleExtensions.ToProtobufArticle)
+            .Select(x => x.ToProtobufArticle())
             .ToList();
 
         return Task.FromResult(new ArticlesReply{Articles = { articleResultList }});

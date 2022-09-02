@@ -17,7 +17,7 @@ public class InventoryItemFetchingService
     {
         var items = _dbContext.InventoryItems.ToList();
 
-        return items.Select(InventoryItemExtensions.ToInventoryItemDto).ToList();
+        return items.Select(x => x.ToInventoryItemDto()).ToList();
     }
 
     public InventoryItemDto FetchItem(int id)

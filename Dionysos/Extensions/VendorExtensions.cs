@@ -1,32 +1,13 @@
 using Dionysos.Dtos;
+using DionysosProtobuf;
 
 namespace Dionysos.Extensions;
 
 public static class VendorExtensions
 {
-    public static VendorDto ToVendorDto(this DionysosProtobuf.Vendor vendor)
+    public static Vendor ToProtobufVendor(this VendorDto vendorDto)
     {
-        return new VendorDto
-        {
-            Id = vendor.Id,
-            Name = vendor.Name,
-            CountryCode = vendor.Name
-        };
-    }
-    
-    public static VendorDto ToVendorDto(this Database.Vendor vendor)
-    {
-        return new VendorDto
-        {
-            Id = vendor.Id,
-            Name = vendor.Name,
-            CountryCode = vendor.Name
-        };
-    }
-
-    public static DionysosProtobuf.Vendor ToProtobufVendor(this VendorDto vendorDto)
-    {
-        return new DionysosProtobuf.Vendor
+        return new Vendor
         {
             Id = vendorDto.Id,
             Name = vendorDto.Name,
