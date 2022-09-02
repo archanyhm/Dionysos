@@ -32,13 +32,13 @@ public class VendorCrudService : DionysosProtobuf.VendorCrudService.VendorCrudSe
         return Task.FromResult(vendor);
     }
 
-    public override Task<VendorsReply> GetAllVendors(EmptyRequest request, ServerCallContext context)
+    public override Task<Vendors> GetAllVendors(EmptyRequest request, ServerCallContext context)
     {
         var vendors = new VendorFetchingService(_mainDbContext)
             .FetchVendors()
             .Select(x => x.ToProtobufVendor())
             .ToList();
-        return Task.FromResult(new VendorsReply { Vendors = { vendors } });
+        return Task.FromResult(new Vendors { Values = {vendors } });
     }
 
     public override Task<BooleanReply> UpdateVendor(Vendor request, ServerCallContext context)

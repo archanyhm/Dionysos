@@ -7,7 +7,7 @@ import "google/protobuf/timestamp.proto";
 service ArticleCrudService {
   rpc CreateArticle (Article) returns (BooleanReply);
   rpc ReadArticle (SimpleArticle) returns (Article);
-  rpc GetAllArticles (EmptyRequest) returns (ArticlesReply);
+  rpc GetAllArticles (EmptyRequest) returns (Articles);
   rpc UpdateArticle (Article) returns (BooleanReply);
   rpc DeleteArticle (SimpleArticle) returns (BooleanReply);
 }
@@ -15,7 +15,7 @@ service ArticleCrudService {
 service InventoryItemCrudService {
   rpc CreateInventoryItem (InventoryItem) returns (BooleanReply);
   rpc ReadInventoryItem (SimpleInventoryItem) returns (InventoryItem);
-  rpc GetAllInventoryItems (EmptyRequest) returns (InventoryItemsReply);
+  rpc GetAllInventoryItems (EmptyRequest) returns (InventoryItems);
   rpc UpdateInventoryItem (InventoryItem) returns (BooleanReply);
   rpc DeleteInventoryItem (SimpleInventoryItem) returns (BooleanReply);
 }
@@ -23,7 +23,7 @@ service InventoryItemCrudService {
 service VendorCrudService {
   rpc CreateVendor (Vendor) returns (BooleanReply);
   rpc ReadVendor (SimpleVendor) returns (Vendor);
-  rpc GetAllVendors (EmptyRequest) returns (VendorsReply);
+  rpc GetAllVendors (EmptyRequest) returns (Vendors);
   rpc UpdateVendor (Vendor) returns (BooleanReply);
   rpc DeleteVendor (SimpleVendor) returns (BooleanReply);
 }
@@ -46,8 +46,8 @@ message SimpleArticle {
   string ean = 1;
 }
 
-message ArticlesReply {
-  repeated Article articles = 1;
+message Articles {
+  repeated Article values = 1;
 }
 
 message InventoryItem {
@@ -60,8 +60,8 @@ message SimpleInventoryItem {
   int32 id = 1;
 }
 
-message InventoryItemsReply {
-  repeated InventoryItem inventoryItems = 1;
+message InventoryItems {
+  repeated InventoryItem values = 1;
 }
 
 message Vendor {
@@ -74,6 +74,6 @@ message SimpleVendor {
   int32 id = 1;
 }
 
-message VendorsReply {
-  repeated Vendor vendors = 1;
+message Vendors {
+  repeated Vendor values = 1;
 }

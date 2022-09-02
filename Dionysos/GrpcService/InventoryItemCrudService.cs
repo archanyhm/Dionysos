@@ -31,11 +31,11 @@ public class InventoryItemCrudService : DionysosProtobuf.InventoryItemCrudServic
         return Task.FromResult(protobufItem);
     }
 
-    public override Task<InventoryItemsReply> GetAllInventoryItems(EmptyRequest request, ServerCallContext context)
+    public override Task<InventoryItems> GetAllInventoryItems(EmptyRequest request, ServerCallContext context)
     {
         var service = new InventoryItemFetchingService(_mainDbContext);
         var items = service.FetchItems().Select(x => x.ToProtobufItem()).ToList();
-        return Task.FromResult(new InventoryItemsReply { InventoryItems = { items } });
+        return Task.FromResult(new InventoryItems { Values = { items } });
     }
 
     public override Task<BooleanReply> UpdateInventoryItem(InventoryItem request, ServerCallContext context)

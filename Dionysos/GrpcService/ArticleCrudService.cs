@@ -31,7 +31,7 @@ public class ArticleCrudService : DionysosProtobuf.ArticleCrudService.ArticleCru
         return Task.FromResult(protobufArticle);
     }
 
-    public override Task<ArticlesReply> GetAllArticles(EmptyRequest request, ServerCallContext context)
+    public override Task<Articles> GetAllArticles(EmptyRequest request, ServerCallContext context)
     {
         var articleFetchingService = new ArticleFetchingService(_mainDbContext);
         var articleResultList = articleFetchingService
@@ -39,7 +39,7 @@ public class ArticleCrudService : DionysosProtobuf.ArticleCrudService.ArticleCru
             .Select(x => x.ToProtobufArticle())
             .ToList();
 
-        return Task.FromResult(new ArticlesReply { Articles = { articleResultList } });
+        return Task.FromResult(new Articles { Values = { articleResultList } });
     }
 
     public override Task<BooleanReply> UpdateArticle(Article request, ServerCallContext context)
