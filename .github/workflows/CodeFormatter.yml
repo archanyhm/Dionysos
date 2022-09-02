@@ -1,0 +1,18 @@
+name: Code formatting tests
+on: [push]
+jobs:
+  Codeformatierung: 
+    name: code formatting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Run dotnet format
+        run: dotnet format src/ --no-restore
+      - name: Commit and push formatted files
+        run: |
+          git config user.name "Code Formatter"
+          git config user.email "codeformatter@imaginary-domain.tld"
+          git add *
+          git commit -m "Automatic code formatting" || true
+          git push
