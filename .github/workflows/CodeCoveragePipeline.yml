@@ -1,0 +1,22 @@
+name: Code Coverage
+on: [push]
+jobs: 
+  CodeCoverage:
+    name: create CodeCoverage Report
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET 6.x
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.x'
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore /p:ContinuousIntegrationBuild=true
+      - name: Test
+        run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage"
+      - name: Codecov Upload
+        uses: codecov/codecov-action@v2
+        with:
+          fail_ci_if_error: true
