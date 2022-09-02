@@ -1,0 +1,14 @@
+name: Unit Tests
+on: [push]
+jobs:
+  Unit-Tests:
+    name: run unit tests
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v2
+      - name: Setup .NET 6.x
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.x'
+      - name: Test Dionysos.sln
+        run: dotnet test 
