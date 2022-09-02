@@ -38,7 +38,7 @@ public class VendorCrudService : DionysosProtobuf.VendorCrudService.VendorCrudSe
             .FetchVendors()
             .Select(x => x.ToProtobufVendor())
             .ToList();
-        return Task.FromResult(new Vendors { Values = {vendors } });
+        return Task.FromResult(new Vendors { Values = { vendors } });
     }
 
     public override Task<BooleanReply> UpdateVendor(Vendor request, ServerCallContext context)

@@ -21,7 +21,6 @@ public class VendorSavingService
             _mainDbContext.Vendors.Add(newItem);
             _mainDbContext.SaveChanges();
         }
-
     }
 
     public void UpdateVendor(VendorDto vendorDto)

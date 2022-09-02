@@ -21,7 +21,6 @@ public class InventoryItemSavingService
             _mainDbContext.InventoryItems.Add(newItem);
             _mainDbContext.SaveChanges();
         }
-
     }
 
     public void UpdateInventoryItem(InventoryItemDto inventoryItemDto)

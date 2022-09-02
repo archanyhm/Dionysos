@@ -21,7 +21,6 @@ public class ArticleSavingService
             _dbContext.Articles.Add(newArticle);
             _dbContext.SaveChanges();
         }
-
     }
 
     public void UpdateArticle(ArticleDto articleToChange)
