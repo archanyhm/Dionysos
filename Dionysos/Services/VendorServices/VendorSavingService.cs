@@ -12,7 +12,7 @@ public class VendorSavingService
     {
         _mainDbContext = mainDbContext;
     }
-    
+
     public void SaveVendor(VendorDto vendorDto)
     {
         if (!IsItemAlreadyKnown(vendorDto))
@@ -20,19 +20,16 @@ public class VendorSavingService
             var newItem = vendorDto.ToDbVendor();
             _mainDbContext.Vendors.Add(newItem);
         }
-        
+
         _mainDbContext.SaveChanges();
     }
 
     public void UpdateVendor(VendorDto vendorDto)
     {
-        if (IsItemAlreadyKnown(vendorDto))
-        {
-            _mainDbContext.Vendors.Update(vendorDto.ToDbVendor());
-        }
+        if (IsItemAlreadyKnown(vendorDto)) _mainDbContext.Vendors.Update(vendorDto.ToDbVendor());
         _mainDbContext.SaveChanges();
     }
-    
+
     private bool IsItemAlreadyKnown(VendorDto vendorDto)
     {
         return _mainDbContext.Vendors.Any(x => x.Id == vendorDto.Id);

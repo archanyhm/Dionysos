@@ -27,6 +27,6 @@ public class ArticleFetchingService
             .Select(x => x.ToArticleDto())
             .SingleOrDefault() ?? new ArticleDto();
 
-        return article ;
+        return article;
     }
 }

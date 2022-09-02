@@ -14,10 +14,7 @@ public class InventoryItemDeletingService
     public void DeleteInventoryItem(int id)
     {
         var item = _dbContext.InventoryItems.SingleOrDefault(x => x.Id == id);
-        if (item is not null)
-        {
-            _dbContext.InventoryItems.Remove(item);
-        }
+        if (item is not null) _dbContext.InventoryItems.Remove(item);
         _dbContext.SaveChanges();
     }
 }

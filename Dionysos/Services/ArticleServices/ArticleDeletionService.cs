@@ -16,10 +16,7 @@ public class ArticleDeletionService
         var article = _dbContext.Articles
             .SingleOrDefault(x => x.Ean == ean);
 
-        if (article is not null)
-        {
-            _dbContext.Articles.Remove(article);
-        }
+        if (article is not null) _dbContext.Articles.Remove(article);
         _dbContext.SaveChanges();
     }
 }

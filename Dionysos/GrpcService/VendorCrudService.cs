@@ -9,13 +9,13 @@ namespace Dionysos.GrpcService;
 
 public class VendorCrudService : DionysosProtobuf.VendorCrudService.VendorCrudServiceBase
 {
-    private readonly MainDbContext _mainDbContext = new MainDbContext();
+    private readonly MainDbContext _mainDbContext = new();
 
     public override Task<BooleanReply> CreateVendor(Vendor request, ServerCallContext context)
     {
         var service = new VendorSavingService(_mainDbContext);
         service.SaveVendor(request.ToVendorDto());
-        
+
         return CreateSuccessResult();
     }
 
@@ -33,7 +33,7 @@ public class VendorCrudService : DionysosProtobuf.VendorCrudService.VendorCrudSe
             .FetchVendors()
             .Select(x => x.ToProtobufVendor())
             .ToList();
-        return Task.FromResult(new VendorsReply{Vendors = { vendors }});
+        return Task.FromResult(new VendorsReply { Vendors = { vendors } });
     }
 
     public override Task<BooleanReply> UpdateVendor(Vendor request, ServerCallContext context)
@@ -47,9 +47,9 @@ public class VendorCrudService : DionysosProtobuf.VendorCrudService.VendorCrudSe
         new VendorDeletionService(_mainDbContext).DeleteVendor(request.Id);
         return base.DeleteVendor(request, context);
     }
-    
+
     private static Task<BooleanReply> CreateSuccessResult()
     {
-        return Task.FromResult(new BooleanReply{Success = true});
+        return Task.FromResult(new BooleanReply { Success = true });
     }
 }

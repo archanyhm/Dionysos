@@ -9,7 +9,7 @@ namespace Dionysos.GrpcService;
 
 public class ArticleCrudService : DionysosProtobuf.ArticleCrudService.ArticleCrudServiceBase
 {
-    private readonly MainDbContext _mainDbContext = new MainDbContext();
+    private readonly MainDbContext _mainDbContext = new();
 
     public override Task<BooleanReply> CreateArticle(Article request, ServerCallContext context)
     {
@@ -34,9 +34,9 @@ public class ArticleCrudService : DionysosProtobuf.ArticleCrudService.ArticleCru
             .Select(x => x.ToProtobufArticle())
             .ToList();
 
-        return Task.FromResult(new ArticlesReply{Articles = { articleResultList }});
+        return Task.FromResult(new ArticlesReply { Articles = { articleResultList } });
     }
-    
+
     public override Task<BooleanReply> UpdateArticle(Article request, ServerCallContext context)
     {
         var articleSavingService = new ArticleSavingService(_mainDbContext);
@@ -48,12 +48,12 @@ public class ArticleCrudService : DionysosProtobuf.ArticleCrudService.ArticleCru
     {
         var service = new ArticleDeletionService(_mainDbContext);
         service.DeleteArticle(request.Ean);
-        
+
         return CreateSuccessResult();
     }
-    
+
     private static Task<BooleanReply> CreateSuccessResult()
     {
-        return Task.FromResult(new BooleanReply{Success = true});
+        return Task.FromResult(new BooleanReply { Success = true });
     }
 }

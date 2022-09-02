@@ -7,6 +7,6 @@ public class PingpongService : PingpongApi.PingpongService.PingpongServiceBase
 {
     public override Task<PongReply> Ping(PingRequest request, ServerCallContext context)
     {
-        return Task.FromResult(new PongReply{Message = request.Message + " Pong!"});
+        return Task.FromResult(new PongReply { Message = request.Message + " Pong!" });
     }
 }

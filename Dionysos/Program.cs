@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using Dionysos.Data;
 using Dionysos.Database;
 using Dionysos.GrpcService;

@@ -1,4 +1,3 @@
-using Dionysos.Database;
 using Dionysos.Dtos;
 using DionysosProtobuf;
 using Google.Protobuf.WellKnownTypes;
@@ -7,9 +6,9 @@ namespace Dionysos.Extensions;
 
 public static class InventoryItemExtensions
 {
-    public static DionysosProtobuf.InventoryItem ToProtobufItem(this InventoryItemDto itemDto)
+    public static InventoryItem ToProtobufItem(this InventoryItemDto itemDto)
     {
-        return new DionysosProtobuf.InventoryItem
+        return new InventoryItem
         {
             Id = itemDto.Id,
             BestBefore = Timestamp.FromDateTime(itemDto.BestBefore ?? DateTime.MinValue),

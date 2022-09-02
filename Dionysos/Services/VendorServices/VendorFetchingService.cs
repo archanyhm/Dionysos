@@ -12,7 +12,7 @@ public class VendorFetchingService
     {
         _dbContext = dbContext;
     }
-    
+
     public List<VendorDto> FetchVendors()
     {
         var items = _dbContext.Vendors.ToList();
@@ -28,5 +28,4 @@ public class VendorFetchingService
             .SingleOrDefault() ?? new VendorDto();
         return item;
     }
-    
 }

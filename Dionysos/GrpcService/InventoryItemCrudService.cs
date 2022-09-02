@@ -1,9 +1,7 @@
 using Dionysos.Database;
-using Dionysos.Dtos;
 using Dionysos.Extensions;
 using Dionysos.Services.InventoryItemServices;
 using DionysosProtobuf;
-using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using InventoryItem = DionysosProtobuf.InventoryItem;
 
@@ -11,13 +9,13 @@ namespace Dionysos.GrpcService;
 
 public class InventoryItemCrudService : DionysosProtobuf.InventoryItemCrudService.InventoryItemCrudServiceBase
 {
-    private readonly MainDbContext _mainDbContext = new MainDbContext();
+    private readonly MainDbContext _mainDbContext = new();
 
     public override Task<BooleanReply> CreateInventoryItem(InventoryItem request, ServerCallContext context)
     {
         var service = new InventoryItemSavingService(_mainDbContext);
         service.SaveInventoryItem(request.ToInventoryItemDto());
-        
+
         return CreateSuccessResult();
     }
 
@@ -32,7 +30,7 @@ public class InventoryItemCrudService : DionysosProtobuf.InventoryItemCrudServic
     {
         var service = new InventoryItemFetchingService(_mainDbContext);
         var items = service.FetchItems().Select(x => x.ToProtobufItem()).ToList();
-        return Task.FromResult(new InventoryItemsReply{InventoryItems = { items }});
+        return Task.FromResult(new InventoryItemsReply { InventoryItems = { items } });
     }
 
     public override Task<BooleanReply> UpdateInventoryItem(InventoryItem request, ServerCallContext context)
@@ -47,9 +45,9 @@ public class InventoryItemCrudService : DionysosProtobuf.InventoryItemCrudServic
         new InventoryItemDeletingService(_mainDbContext).DeleteInventoryItem(request.Id);
         return CreateSuccessResult();
     }
-    
+
     private static Task<BooleanReply> CreateSuccessResult()
     {
-        return Task.FromResult(new BooleanReply{Success = true});
+        return Task.FromResult(new BooleanReply { Success = true });
     }
 }
