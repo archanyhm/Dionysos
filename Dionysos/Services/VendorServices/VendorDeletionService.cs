@@ -14,7 +14,10 @@ public class VendorDeletionService
     public void DeleteVendor(int id)
     {
         var vendor = _dbContext.Vendors.SingleOrDefault(x => x.Id == id);
-        if (vendor is not null) _dbContext.Vendors.Remove(vendor);
-        _dbContext.SaveChanges();
+        if (vendor is not null)
+        {
+            _dbContext.Vendors.Remove(vendor);
+            _dbContext.SaveChanges();
+        }
     }
 }

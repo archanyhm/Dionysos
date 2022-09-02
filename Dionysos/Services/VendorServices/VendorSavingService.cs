@@ -19,15 +19,18 @@ public class VendorSavingService
         {
             var newItem = vendorDto.ToDbVendor();
             _mainDbContext.Vendors.Add(newItem);
+            _mainDbContext.SaveChanges();
         }
 
-        _mainDbContext.SaveChanges();
     }
 
     public void UpdateVendor(VendorDto vendorDto)
     {
-        if (IsItemAlreadyKnown(vendorDto)) _mainDbContext.Vendors.Update(vendorDto.ToDbVendor());
-        _mainDbContext.SaveChanges();
+        if (IsItemAlreadyKnown(vendorDto))
+        {
+            _mainDbContext.Vendors.Update(vendorDto.ToDbVendor());
+            _mainDbContext.SaveChanges();
+        }
     }
 
     private bool IsItemAlreadyKnown(VendorDto vendorDto)

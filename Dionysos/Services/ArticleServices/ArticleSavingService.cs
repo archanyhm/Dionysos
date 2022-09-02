@@ -19,15 +19,18 @@ public class ArticleSavingService
         {
             var newArticle = articleToAdd.ToDbArticle();
             _dbContext.Articles.Add(newArticle);
+            _dbContext.SaveChanges();
         }
 
-        _dbContext.SaveChanges();
     }
 
     public void UpdateArticle(ArticleDto articleToChange)
     {
-        if (IsArticleAlreadyKnown(articleToChange)) _dbContext.Articles.Update(articleToChange.ToDbArticle());
-        _dbContext.SaveChanges();
+        if (IsArticleAlreadyKnown(articleToChange))
+        {
+            _dbContext.Articles.Update(articleToChange.ToDbArticle());
+            _dbContext.SaveChanges();
+        }
     }
 
     private bool IsArticleAlreadyKnown(ArticleDto articleToAdd)

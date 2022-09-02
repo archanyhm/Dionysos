@@ -19,16 +19,18 @@ public class InventoryItemSavingService
         {
             var newItem = inventoryItemDto.ToDbInventoryItem();
             _mainDbContext.InventoryItems.Add(newItem);
+            _mainDbContext.SaveChanges();
         }
 
-        _mainDbContext.SaveChanges();
     }
 
     public void UpdateInventoryItem(InventoryItemDto inventoryItemDto)
     {
         if (IsItemAlreadyKnown(inventoryItemDto))
+        {
             _mainDbContext.InventoryItems.Update(inventoryItemDto.ToDbInventoryItem());
-        _mainDbContext.SaveChanges();
+            _mainDbContext.SaveChanges();
+        }
     }
 
     private bool IsItemAlreadyKnown(InventoryItemDto inventoryItemDto)
