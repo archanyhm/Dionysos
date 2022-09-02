@@ -9,7 +9,12 @@ namespace Dionysos.GrpcService;
 
 public class ArticleCrudService : DionysosProtobuf.ArticleCrudService.ArticleCrudServiceBase
 {
-    private readonly MainDbContext _mainDbContext = new();
+    private readonly MainDbContext _mainDbContext;
+
+    public ArticleCrudService(MainDbContext mainDbContext)
+    {
+        _mainDbContext = mainDbContext;
+    }
 
     public override Task<BooleanReply> CreateArticle(Article request, ServerCallContext context)
     {

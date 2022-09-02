@@ -9,7 +9,12 @@ namespace Dionysos.GrpcService;
 
 public class VendorCrudService : DionysosProtobuf.VendorCrudService.VendorCrudServiceBase
 {
-    private readonly MainDbContext _mainDbContext = new();
+    private readonly MainDbContext _mainDbContext;
+
+    public VendorCrudService(MainDbContext mainDbContext)
+    {
+        _mainDbContext = mainDbContext;
+    }
 
     public override Task<BooleanReply> CreateVendor(Vendor request, ServerCallContext context)
     {

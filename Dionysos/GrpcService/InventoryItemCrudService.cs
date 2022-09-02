@@ -9,7 +9,12 @@ namespace Dionysos.GrpcService;
 
 public class InventoryItemCrudService : DionysosProtobuf.InventoryItemCrudService.InventoryItemCrudServiceBase
 {
-    private readonly MainDbContext _mainDbContext = new();
+    private readonly MainDbContext _mainDbContext;
+
+    public InventoryItemCrudService(MainDbContext mainDbContext)
+    {
+        _mainDbContext = mainDbContext;
+    }
 
     public override Task<BooleanReply> CreateInventoryItem(InventoryItem request, ServerCallContext context)
     {
