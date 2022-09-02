@@ -31,6 +31,7 @@ app.MapBlazorHub();
 app.MapGrpcService<PingpongService>();
 app.MapGrpcService<ArticleCrudService>();
 app.MapGrpcService<InventoryItemCrudService>();
+app.MapGrpcService<VendorCrudService>();
 app.MapControllers();
 app.MapFallbackToPage("/_Host");
 
