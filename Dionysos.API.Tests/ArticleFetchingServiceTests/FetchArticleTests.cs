@@ -47,13 +47,7 @@ public class FetchArticleTests
 
         actual.Should().BeEquivalentTo(expected);
     }
-    
-    // [Fact]
-    // public void MultipleArticlesInDb_InvalidOperationExceptionThrown()
-    // {
-    //
-    // }
-    
+
     #region DbSetMock
 
     private Mock<IMainDbContext> GetDbMock()

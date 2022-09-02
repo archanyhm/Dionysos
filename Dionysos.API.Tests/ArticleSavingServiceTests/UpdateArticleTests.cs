@@ -30,19 +30,6 @@ public class UpdateArticleTests
         dbContextMock.Verify(x => x.SaveChanges(), Times.Once);
     }
 
-    // [Fact]
-    // public void NotExistingData_NotUpdated()
-    // {
-    //     var dbContextMock = new Mock<IMainDbContext>();
-    //     SetupMock(dbContextMock);
-    //
-    //     var mainDbContext = dbContextMock.Object;
-    //     var classUnderTest = new ArticleSavingService(mainDbContext);
-    //     classUnderTest.UpdateArticle(_articleDto);
-    //     
-    //     dbContextMock.Verify(x => x.Articles.Update(It.IsAny<Article>()), Times.Never);
-    // }
-
     [Fact]
     public void AlreadyExsistingPk_ArticleUpdated()
     {
