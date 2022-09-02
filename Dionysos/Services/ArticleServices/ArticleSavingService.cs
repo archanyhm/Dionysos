@@ -15,7 +15,7 @@ public class ArticleSavingService
 
     public void SaveArticle(ArticleDto articleToAdd)
     {
-        if (!IsArticleAlreadyKnown(articleToAdd))
+        if (!DoesArticleExist(articleToAdd))
         {
             var newArticle = articleToAdd.ToDbArticle();
             _dbContext.Articles.Add(newArticle);
@@ -26,14 +26,14 @@ public class ArticleSavingService
 
     public void UpdateArticle(ArticleDto articleToChange)
     {
-        if (IsArticleAlreadyKnown(articleToChange))
+        if (DoesArticleExist(articleToChange))
         {
             _dbContext.Articles.Update(articleToChange.ToDbArticle());
             _dbContext.SaveChanges();
         }
     }
 
-    private bool IsArticleAlreadyKnown(ArticleDto articleToAdd)
+    private bool DoesArticleExist(ArticleDto articleToAdd)
     {
         return _dbContext.Articles.Any(x => x.Ean == articleToAdd.Ean);
     }

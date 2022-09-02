@@ -15,7 +15,7 @@ public class InventoryItemSavingService
 
     public void SaveInventoryItem(InventoryItemDto inventoryItemDto)
     {
-        if (!IsItemAlreadyKnown(inventoryItemDto))
+        if (!DoesInventoryItemExist(inventoryItemDto))
         {
             var newItem = inventoryItemDto.ToDbInventoryItem();
             _mainDbContext.InventoryItems.Add(newItem);
@@ -26,14 +26,14 @@ public class InventoryItemSavingService
 
     public void UpdateInventoryItem(InventoryItemDto inventoryItemDto)
     {
-        if (IsItemAlreadyKnown(inventoryItemDto))
+        if (DoesInventoryItemExist(inventoryItemDto))
         {
             _mainDbContext.InventoryItems.Update(inventoryItemDto.ToDbInventoryItem());
             _mainDbContext.SaveChanges();
         }
     }
 
-    private bool IsItemAlreadyKnown(InventoryItemDto inventoryItemDto)
+    private bool DoesInventoryItemExist(InventoryItemDto inventoryItemDto)
     {
         return _mainDbContext.InventoryItems.Any(x => x.Id == inventoryItemDto.Id);
     }

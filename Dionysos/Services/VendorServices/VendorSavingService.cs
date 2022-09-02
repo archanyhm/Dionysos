@@ -15,7 +15,7 @@ public class VendorSavingService
 
     public void SaveVendor(VendorDto vendorDto)
     {
-        if (!IsItemAlreadyKnown(vendorDto))
+        if (!DoesVendorExist(vendorDto))
         {
             var newItem = vendorDto.ToDbVendor();
             _mainDbContext.Vendors.Add(newItem);
@@ -26,14 +26,14 @@ public class VendorSavingService
 
     public void UpdateVendor(VendorDto vendorDto)
     {
-        if (IsItemAlreadyKnown(vendorDto))
+        if (DoesVendorExist(vendorDto))
         {
             _mainDbContext.Vendors.Update(vendorDto.ToDbVendor());
             _mainDbContext.SaveChanges();
         }
     }
 
-    private bool IsItemAlreadyKnown(VendorDto vendorDto)
+    private bool DoesVendorExist(VendorDto vendorDto)
     {
         return _mainDbContext.Vendors.Any(x => x.Id == vendorDto.Id);
     }
