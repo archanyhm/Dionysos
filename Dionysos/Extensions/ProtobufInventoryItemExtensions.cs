@@ -5,7 +5,7 @@ namespace Dionysos.Extensions;
 
 public static class ProtobufItemExtensions
 {
-    public static InventoryItemDto ToInventoryItemDto(this Item protobufItem)
+    public static InventoryItemDto ToInventoryItemDto(this DionysosProtobuf.InventoryItem protobufItem)
     {
         return new InventoryItemDto
         {

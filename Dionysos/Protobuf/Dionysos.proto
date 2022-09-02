@@ -12,12 +12,12 @@ service ArticleCrudService {
   rpc DeleteArticle (SimpleArticle) returns (BooleanReply);
 }
 
-service ItemCrudService {
-  rpc CreateItem (Item) returns (BooleanReply);
-  rpc ReadItem (SimpleItem) returns (Item);
-  rpc GetAllItems (EmptyRequest) returns (ItemsReply);
-  rpc UpdateItem (Item) returns (BooleanReply);
-  rpc DeleteItem (SimpleItem) returns (BooleanReply);
+service InventoryItemCrudService {
+  rpc CreateInventoryItem (InventoryItem) returns (BooleanReply);
+  rpc ReadInventoryItem (SimpleInventoryItem) returns (InventoryItem);
+  rpc GetAllInventoryItems (EmptyRequest) returns (InventoryItemsReply);
+  rpc UpdateInventoryItem (InventoryItem) returns (BooleanReply);
+  rpc DeleteInventoryItem (SimpleInventoryItem) returns (BooleanReply);
 }
 
 service VendorCrudService {
@@ -50,18 +50,18 @@ message ArticlesReply {
   repeated Article articles = 1;
 }
 
-message Item {
+message InventoryItem {
   int32 id = 1;
   google.protobuf.Timestamp best_before = 2;
   string Ean = 3;
 }
 
-message SimpleItem {
+message SimpleInventoryItem {
   int32 id = 1;
 }
 
-message ItemsReply {
-  repeated Item items = 1;
+message InventoryItemsReply {
+  repeated InventoryItem inventoryItems = 1;
 }
 
 message Vendor {

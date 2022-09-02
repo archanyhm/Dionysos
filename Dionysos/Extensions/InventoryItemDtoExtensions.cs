@@ -7,9 +7,9 @@ namespace Dionysos.Extensions;
 
 public static class InventoryItemExtensions
 {
-    public static Item ToProtobufItem(this InventoryItemDto itemDto)
+    public static DionysosProtobuf.InventoryItem ToProtobufItem(this InventoryItemDto itemDto)
     {
-        return new Item
+        return new DionysosProtobuf.InventoryItem
         {
             Id = itemDto.Id,
             BestBefore = Timestamp.FromDateTime(itemDto.BestBefore ?? DateTime.MinValue),
@@ -17,9 +17,9 @@ public static class InventoryItemExtensions
         };
     }
 
-    public static InventoryItem ToDbInventoryItem(this InventoryItemDto inventoryItemDto)
+    public static Database.InventoryItem ToDbInventoryItem(this InventoryItemDto inventoryItemDto)
     {
-        return new InventoryItem
+        return new Database.InventoryItem
         {
             BestBefore = inventoryItemDto.BestBefore,
             Ean = inventoryItemDto.Ean
