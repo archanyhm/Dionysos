@@ -10,23 +10,16 @@ namespace Dionysos.API.Tests.ArticleSavingServiceTests;
 
 public class UpdateArticleTests
 {
-     #region TestData
-
-    private static readonly Article SomeArticle = new() {Ean = "1", Description = "someDesc", Name = "someName", VendorId = 1,};
-    private readonly ArticleDto _articleDto = new() {Ean = "1", Description = "someDesc", Name = "someName", VendorId = 1};
-
-    #endregion
-    
     [Fact]
     public void SaveChangesGetsCalled()
     {
         var dbContextMock = new Mock<IMainDbContext>();
         SetupMock(dbContextMock, SomeArticle);
-        
+
         var mainDbContext = dbContextMock.Object;
         var classUnderTest = new ArticleSavingService(mainDbContext);
         classUnderTest.UpdateArticle(_articleDto);
-        
+
         dbContextMock.Verify(x => x.SaveChanges(), Times.Once);
     }
 
@@ -35,21 +28,31 @@ public class UpdateArticleTests
     {
         var dbContextMock = new Mock<IMainDbContext>();
         SetupMock(dbContextMock, SomeArticle);
-        
+
         var mainDbContext = dbContextMock.Object;
         var classUnderTest = new ArticleSavingService(mainDbContext);
         classUnderTest.UpdateArticle(_articleDto);
-        
+
         dbContextMock.Verify(x => x.Articles.Update(It.IsAny<Article>()), Times.Once);
     }
-    
+
+    #region TestData
+
+    private static readonly Article SomeArticle = new()
+        { Ean = "1", Description = "someDesc", Name = "someName", VendorId = 1 };
+
+    private readonly ArticleDto _articleDto = new()
+        { Ean = "1", Description = "someDesc", Name = "someName", VendorId = 1 };
+
+    #endregion
+
     #region DbSetMock
 
     private void SetupMock(Mock<IMainDbContext> dbContextMock, params Article[] articles)
     {
         dbContextMock.Setup(x => x.Articles).Returns(SetupArticlesMock(articles));
     }
-    
+
     private DbSet<Article> SetupArticlesMock(params Article[] articles)
     {
         var data = articles.AsQueryable();
@@ -59,7 +62,7 @@ public class UpdateArticleTests
         mockSet.As<IQueryable<Article>>().Setup(m => m.Expression).Returns(data.Expression);
         mockSet.As<IQueryable<Article>>().Setup(m => m.ElementType).Returns(data.ElementType);
         mockSet.As<IQueryable<Article>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-        
+
         return mockSet.Object;
     }
 
