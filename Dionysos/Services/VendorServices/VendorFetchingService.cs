@@ -25,7 +25,7 @@ public class VendorFetchingService
         var item = _dbContext.Vendors
             .Where(x => x.Id == id)
             .Select(x => x.ToVendorDto())
-            .SingleOrDefault() ?? new VendorDto();
+            .Single();
         return item;
     }
 }

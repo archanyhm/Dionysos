@@ -25,7 +25,7 @@ public class InventoryItemFetchingService
         var item = _dbContext.InventoryItems
             .Where(x => x.Id == id)
             .Select(x => x.ToInventoryItemDto())
-            .SingleOrDefault();
-        return item ?? new InventoryItemDto();
+            .Single();
+        return item;
     }
 }

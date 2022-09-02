@@ -25,7 +25,7 @@ public class ArticleFetchingService
         var article = _dbContext.Articles
             .Where(x => x.Ean == ean)
             .Select(x => x.ToArticleDto())
-            .SingleOrDefault() ?? new ArticleDto();
+            .Single();
 
         return article;
     }
