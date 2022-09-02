@@ -28,7 +28,6 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.MapBlazorHub();
-app.MapGrpcService<PingpongService>();
 app.MapGrpcService<ArticleCrudService>();
 app.MapGrpcService<InventoryItemCrudService>();
 app.MapGrpcService<VendorCrudService>();
