@@ -37,7 +37,7 @@ public class DeleteArticleTests
     private const string Ean = "1";
 
     private static readonly Article Article1 = new()
-        { Ean = Ean, Description = "someDesc", Name = "someName", VendorId = 1 };
+    { Ean = Ean, Description = "someDesc", Name = "someName", VendorId = 1 };
 
     #endregion
 
