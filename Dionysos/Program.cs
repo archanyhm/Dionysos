@@ -1,13 +1,9 @@
-using Dionysos.Data;
 using Dionysos.Database;
 using Dionysos.GrpcService;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddDbContext<MainDbContext>();
 builder.Services.AddGrpc();
 
@@ -21,17 +17,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-//app.UseHttpsRedirection();
-
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.MapBlazorHub();
 app.MapGrpcService<ArticleCrudService>();
 app.MapGrpcService<InventoryItemCrudService>();
 app.MapGrpcService<VendorCrudService>();
-app.MapControllers();
-app.MapFallbackToPage("/_Host");
 
 app.Run();
