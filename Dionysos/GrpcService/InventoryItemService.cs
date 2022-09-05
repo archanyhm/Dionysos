@@ -7,11 +7,11 @@ using InventoryItem = DionysosProtobuf.InventoryItem;
 
 namespace Dionysos.GrpcService;
 
-public class InventoryItemCrudService : DionysosProtobuf.InventoryItemCrudService.InventoryItemCrudServiceBase
+public class InventoryItemService : DionysosProtobuf.InventoryItemService.InventoryItemServiceBase
 {
     private readonly MainDbContext _mainDbContext;
 
-    public InventoryItemCrudService(MainDbContext mainDbContext)
+    public InventoryItemService(MainDbContext mainDbContext)
     {
         _mainDbContext = mainDbContext;
     }
