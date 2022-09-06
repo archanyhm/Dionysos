@@ -1,3 +1,4 @@
+using Dionysos.CustomExceptions;
 using Dionysos.Database;
 using Dionysos.Dtos;
 using Dionysos.Extensions;
@@ -13,19 +14,27 @@ public class VendorFetchingService
         _dbContext = dbContext;
     }
 
-    public List<VendorDto> FetchVendors()
+    public IEnumerable<VendorDto> FetchVendors()
     {
-        var items = _dbContext.Vendors.ToList();
+        var vendors = _dbContext.Vendors.ToList();
+        if (!vendors.Any()) throw new ObjectDoesNotExistException();
 
-        return items.Select(x => x.ToVendorDto()).ToList();
+        return vendors.Select(x => x.ToVendorDto()).ToList();
     }
 
     public VendorDto FetchVendor(int id)
     {
-        var item = _dbContext.Vendors
-            .Where(x => x.Id == id)
-            .Select(x => x.ToVendorDto())
-            .Single();
-        return item;
+        try
+        {
+            var vendor = _dbContext.Vendors
+                .Where(x => x.Id == id)
+                .Select(x => x.ToVendorDto())
+                .Single();
+            return vendor;
+        }
+        catch (ArgumentNullException e)
+        {
+            throw new ObjectDoesNotExistException();
+        }
     }
 }

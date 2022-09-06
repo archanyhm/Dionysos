@@ -1,3 +1,4 @@
+using Dionysos.CustomExceptions;
 using Dionysos.Database;
 using Dionysos.Dtos;
 using Dionysos.Extensions;
@@ -13,20 +14,28 @@ public class ArticleFetchingService
         _dbContext = mainDbContext;
     }
 
-    public List<ArticleDto> FetchArticles()
+    public IEnumerable<ArticleDto> FetchArticles()
     {
         var articles = _dbContext.Articles.ToList();
+        if (!articles.Any()) throw new ObjectDoesNotExistException();
 
         return articles.Select(x => x.ToArticleDto()).ToList();
     }
 
     public ArticleDto FetchArticle(string ean)
     {
-        var article = _dbContext.Articles
-            .Where(x => x.Ean == ean)
-            .Select(x => x.ToArticleDto())
-            .Single();
+        try
+        {
+            var article = _dbContext.Articles
+                .Where(x => x.Ean == ean)
+                .Select(x => x.ToArticleDto())
+                .Single();
 
-        return article;
+            return article;
+        }
+        catch (ArgumentNullException e)
+        {
+            throw new ObjectDoesNotExistException();
+        }
     }
 }
