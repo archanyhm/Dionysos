@@ -3,6 +3,7 @@ using Dionysos.Database;
 using Dionysos.Dtos;
 using Dionysos.Extensions;
 using Microsoft.EntityFrameworkCore;
+using InvalidDataException = Dionysos.CustomExceptions.InvalidDataException;
 
 namespace Dionysos.Services.InventoryItemServices;
 
@@ -18,6 +19,7 @@ public class InventoryItemSavingService
     public void SaveInventoryItem(InventoryItemDto inventoryItemDto)
     {
         if (DoesInventoryItemExist(inventoryItemDto)) throw new ObjectAlreadyExistsException();
+        if (IsForeignKeyValid(inventoryItemDto.Ean)) throw new InvalidDataException();
 
         try
         {
@@ -33,6 +35,7 @@ public class InventoryItemSavingService
     public void UpdateInventoryItem(InventoryItemDto inventoryItemDto)
     {
         if (!DoesInventoryItemExist(inventoryItemDto)) throw new ObjectDoesNotExistException();
+        if (IsForeignKeyValid(inventoryItemDto.Ean)) throw new InvalidDataException();
         try
         {
             _mainDbContext.InventoryItems.Update(inventoryItemDto.ToDbInventoryItem());
@@ -44,6 +47,11 @@ public class InventoryItemSavingService
         }
     }
 
+    private bool IsForeignKeyValid(string ean)
+    {
+        return _mainDbContext.Articles.Any(x => x.Ean == ean);
+    }
+    
     private bool DoesInventoryItemExist(InventoryItemDto inventoryItemDto)
     {
         return _mainDbContext.InventoryItems.Any(x => x.Id == inventoryItemDto.Id);

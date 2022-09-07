@@ -3,6 +3,7 @@ using Dionysos.Database;
 using Dionysos.Dtos;
 using Dionysos.Extensions;
 using Microsoft.EntityFrameworkCore;
+using InvalidDataException = Dionysos.CustomExceptions.InvalidDataException;
 
 namespace Dionysos.Services.ArticleServices;
 
@@ -18,7 +19,8 @@ public class ArticleSavingService
     public void SaveArticle(ArticleDto articleToAdd)
     {
         if (DoesArticleExist(articleToAdd)) throw new ObjectAlreadyExistsException();
-
+        if (!IsForeignKeyValid(articleToAdd.VendorId)) throw new InvalidDataException();
+        
         try
         {
             _dbContext.Articles.Add(articleToAdd.ToDbArticle());
@@ -33,6 +35,7 @@ public class ArticleSavingService
     public void UpdateArticle(ArticleDto articleToChange)
     {
         if (!DoesArticleExist(articleToChange)) throw new ObjectDoesNotExistException();
+        if (!IsForeignKeyValid(articleToChange.VendorId)) throw new InvalidDataException();
 
         try
         {
@@ -46,6 +49,11 @@ public class ArticleSavingService
 
     }
 
+    private bool IsForeignKeyValid(int vendorId)
+    {
+        return _dbContext.Vendors.Any(x => x.Id == vendorId);
+    }
+    
     private static void ThrowDatabaseException(DbUpdateException e)
     {
         throw new DatabaseException(
