@@ -1,29 +1,29 @@
 using Dionysos.CustomExceptions;
 using Dionysos.Database;
 using Dionysos.Extensions;
-using Dionysos.Services.VendorServices;
+using Dionysos.Services.InventoryItemServices;
 using DionysosProtobuf;
 using Grpc.Core;
 using InvalidDataException = Dionysos.CustomExceptions.InvalidDataException;
-using Vendor = DionysosProtobuf.Vendor;
+using InventoryItem = DionysosProtobuf.InventoryItem;
 
 namespace Dionysos.GrpcService;
 
-public class VendorCrudService : DionysosProtobuf.VendorCrudService.VendorCrudServiceBase
+public class InventoryItemService : DionysosProtobuf.InventoryItemService.InventoryItemServiceBase
 {
     private readonly MainDbContext _mainDbContext;
 
-    public VendorCrudService(MainDbContext mainDbContext)
+    public InventoryItemService(MainDbContext mainDbContext)
     {
         _mainDbContext = mainDbContext;
     }
 
-    public override Task<BooleanReply> CreateVendor(Vendor request, ServerCallContext context)
+    public override Task<BooleanReply> CreateInventoryItem(InventoryItem request, ServerCallContext context)
     {
         try
         {
-            var service = new VendorSavingService(_mainDbContext);
-            service.SaveVendor(request.ToVendorDto());
+            var service = new InventoryItemSavingService(_mainDbContext);
+            service.SaveInventoryItem(request.ToInventoryItemDto());
 
             return CreateSuccessResult();
         }
@@ -45,14 +45,13 @@ public class VendorCrudService : DionysosProtobuf.VendorCrudService.VendorCrudSe
         }
     }
 
-    public override Task<Vendor> ReadVendor(SimpleVendor request, ServerCallContext context)
+    public override Task<InventoryItem> ReadInventoryItem(SimpleInventoryItem request, ServerCallContext context)
     {
         try
         {
-            var vendor = new VendorFetchingService(_mainDbContext)
-                .FetchVendor(request.Id)
-                .ToProtobufVendor();
-            return Task.FromResult(vendor);
+            var itemDto = new InventoryItemFetchingService(_mainDbContext).FetchItem(request.Id);
+            var protobufItem = itemDto.ToProtobufItem();
+            return Task.FromResult(protobufItem);
         }
         catch (ObjectDoesNotExistException)
         {
@@ -64,15 +63,13 @@ public class VendorCrudService : DionysosProtobuf.VendorCrudService.VendorCrudSe
         }
     }
 
-    public override Task<Vendors> GetAllVendors(EmptyRequest request, ServerCallContext context)
+    public override Task<InventoryItems> GetAllInventoryItems(EmptyRequest request, ServerCallContext context)
     {
         try
         {
-            var vendors = new VendorFetchingService(_mainDbContext)
-                .FetchVendors()
-                .Select(x => x.ToProtobufVendor())
-                .ToList();
-            return Task.FromResult(new Vendors { Values = { vendors } });
+            var service = new InventoryItemFetchingService(_mainDbContext);
+            var items = service.FetchItems().Select(x => x.ToProtobufItem()).ToList();
+            return Task.FromResult(new InventoryItems { Values = { items } });
         }
         catch (ObjectDoesNotExistException)
         {
@@ -84,11 +81,12 @@ public class VendorCrudService : DionysosProtobuf.VendorCrudService.VendorCrudSe
         }
     }
 
-    public override Task<BooleanReply> UpdateVendor(Vendor request, ServerCallContext context)
+    public override Task<BooleanReply> UpdateInventoryItem(InventoryItem request, ServerCallContext context)
     {
         try
         {
-            new VendorSavingService(_mainDbContext).SaveVendor(request.ToVendorDto());
+            var service = new InventoryItemSavingService(_mainDbContext);
+            service.UpdateInventoryItem(request.ToInventoryItemDto());
             return CreateSuccessResult();
         }
         catch (InvalidDataException)
@@ -109,12 +107,12 @@ public class VendorCrudService : DionysosProtobuf.VendorCrudService.VendorCrudSe
         }
     }
 
-    public override Task<BooleanReply> DeleteVendor(SimpleVendor request, ServerCallContext context)
+    public override Task<BooleanReply> DeleteInventoryItem(SimpleInventoryItem request, ServerCallContext context)
     {
         try
         {
-            new VendorDeletionService(_mainDbContext).DeleteVendor(request.Id);
-            return base.DeleteVendor(request, context);
+            new InventoryItemDeletingService(_mainDbContext).DeleteInventoryItem(request.Id);
+            return CreateSuccessResult();
         }
         catch (ObjectDoesNotExistException)
         {

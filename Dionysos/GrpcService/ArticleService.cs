@@ -9,11 +9,11 @@ using InvalidDataException = Dionysos.CustomExceptions.InvalidDataException;
 
 namespace Dionysos.GrpcService;
 
-public class ArticleCrudService : DionysosProtobuf.ArticleCrudService.ArticleCrudServiceBase
+public class ArticleService : DionysosProtobuf.ArticleService.ArticleServiceBase
 {
     private readonly MainDbContext _mainDbContext;
 
-    public ArticleCrudService(MainDbContext mainDbContext)
+    public ArticleService(MainDbContext mainDbContext)
     {
         _mainDbContext = mainDbContext;
     }
