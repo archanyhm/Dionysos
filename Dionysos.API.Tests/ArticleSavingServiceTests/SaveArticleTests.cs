@@ -1,7 +1,7 @@
 using System.Linq;
-using Dionysos.Database;
-using Dionysos.Dtos;
-using Dionysos.Services.ArticleServices;
+using Dionysos.Dionysos.BL.Dtos;
+using Dionysos.Dionysos.BL.Services.ArticleServices;
+using Dionysos.Dionysos.Database.Database;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Xunit;
