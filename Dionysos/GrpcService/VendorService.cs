@@ -7,11 +7,11 @@ using Vendor = DionysosProtobuf.Vendor;
 
 namespace Dionysos.GrpcService;
 
-public class VendorCrudService : DionysosProtobuf.VendorCrudService.VendorCrudServiceBase
+public class VendorService : DionysosProtobuf.VendorService.VendorServiceBase
 {
     private readonly MainDbContext _mainDbContext;
 
-    public VendorCrudService(MainDbContext mainDbContext)
+    public VendorService(MainDbContext mainDbContext)
     {
         _mainDbContext = mainDbContext;
     }

@@ -4,7 +4,7 @@ option csharp_namespace = "DionysosProtobuf";
 package DionysosProtobuf;
 import "google/protobuf/timestamp.proto";
 
-service ArticleCrudService {
+service ArticleService {
   rpc CreateArticle (Article) returns (BooleanReply);
   rpc ReadArticle (SimpleArticle) returns (Article);
   rpc GetAllArticles (EmptyRequest) returns (Articles);
@@ -12,7 +12,7 @@ service ArticleCrudService {
   rpc DeleteArticle (SimpleArticle) returns (BooleanReply);
 }
 
-service InventoryItemCrudService {
+service InventoryItemService {
   rpc CreateInventoryItem (InventoryItem) returns (BooleanReply);
   rpc ReadInventoryItem (SimpleInventoryItem) returns (InventoryItem);
   rpc GetAllInventoryItems (EmptyRequest) returns (InventoryItems);
@@ -20,7 +20,7 @@ service InventoryItemCrudService {
   rpc DeleteInventoryItem (SimpleInventoryItem) returns (BooleanReply);
 }
 
-service VendorCrudService {
+service VendorService {
   rpc CreateVendor (Vendor) returns (BooleanReply);
   rpc ReadVendor (SimpleVendor) returns (Vendor);
   rpc GetAllVendors (EmptyRequest) returns (Vendors);

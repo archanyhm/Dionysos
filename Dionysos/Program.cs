@@ -17,8 +17,10 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
 app.MapGrpcService<ArticleCrudService>();
 app.MapGrpcService<InventoryItemCrudService>();
 app.MapGrpcService<VendorCrudService>();
+
 
 app.Run();
