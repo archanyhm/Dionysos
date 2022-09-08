@@ -1,6 +1,6 @@
-using Dionysos.Dionysos.BL.Dtos;
+using Dionysos.BL.Dionysos.BL.Dtos;
 
-namespace Dionysos.Dionysos.BL.Extensions;
+namespace Dionysos.BL.Dionysos.BL.Extensions;
 
 public static class VendorExtensions
 {

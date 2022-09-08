@@ -1,8 +1,8 @@
-using Dionysos.Dionysos.BL.Dtos;
+using Dionysos.BL.Dionysos.BL.Dtos;
 using DionysosProtobuf;
 using Google.Protobuf.WellKnownTypes;
 
-namespace Dionysos.Dionysos.BL.Extensions;
+namespace Dionysos.Extensions;
 
 public static class InventoryItemDtoExtensions
 {

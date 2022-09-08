@@ -1,7 +1,7 @@
-using Dionysos.Dionysos.BL.Dtos;
+using Dionysos.BL.Dionysos.BL.Dtos;
 using DionysosProtobuf;
 
-namespace Dionysos.Dionysos.BL.Extensions;
+namespace Dionysos.Extensions;
 
 public static class ProtobufVendorExtensions
 {

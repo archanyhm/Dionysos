@@ -1,6 +1,6 @@
-using Dionysos.Dionysos.Database.Database;
+using Dionysos.Database.Database;
 
-namespace Dionysos.Dionysos.BL.Services.ArticleServices;
+namespace Dionysos.BL.Dionysos.BL.Services.ArticleServices;
 
 public class ArticleDeletionService
 {

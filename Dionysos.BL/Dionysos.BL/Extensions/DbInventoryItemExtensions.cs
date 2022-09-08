@@ -1,7 +1,7 @@
-using Dionysos.Dionysos.BL.Dtos;
-using Dionysos.Dionysos.Database.Database;
+using Dionysos.BL.Dionysos.BL.Dtos;
+using Dionysos.Database.Database;
 
-namespace Dionysos.Dionysos.BL.Extensions;
+namespace Dionysos.BL.Dionysos.BL.Extensions;
 
 public static class DbInventoryItemExtensions
 {

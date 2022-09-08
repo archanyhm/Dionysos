@@ -1,6 +1,6 @@
-using Dionysos.Dionysos.Database.Database;
+using Dionysos.Database.Database;
 
-namespace Dionysos.Dionysos.BL.Services.InventoryItemServices;
+namespace Dionysos.BL.Dionysos.BL.Services.InventoryItemServices;
 
 public class InventoryItemDeletingService
 {

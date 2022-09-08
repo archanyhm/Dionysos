@@ -1,6 +1,6 @@
-using Dionysos.Dionysos.BL.Extensions;
-using Dionysos.Dionysos.BL.Services.InventoryItemServices;
-using Dionysos.Dionysos.Database.Database;
+using Dionysos.BL.Dionysos.BL.Services.InventoryItemServices;
+using Dionysos.Database.Database;
+using Dionysos.Extensions;
 using DionysosProtobuf;
 using Grpc.Core;
 using InventoryItem = DionysosProtobuf.InventoryItem;

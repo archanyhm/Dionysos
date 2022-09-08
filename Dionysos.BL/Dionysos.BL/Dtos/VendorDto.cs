@@ -1,4 +1,4 @@
-namespace Dionysos.Dionysos.BL.Dtos;
+namespace Dionysos.BL.Dionysos.BL.Dtos;
 
 public class VendorDto
 {

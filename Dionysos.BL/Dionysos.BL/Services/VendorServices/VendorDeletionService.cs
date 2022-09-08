@@ -1,6 +1,6 @@
-using Dionysos.Dionysos.Database.Database;
+using Dionysos.Database.Database;
 
-namespace Dionysos.Dionysos.BL.Services.VendorServices;
+namespace Dionysos.BL.Dionysos.BL.Services.VendorServices;
 
 public class VendorDeletionService
 {

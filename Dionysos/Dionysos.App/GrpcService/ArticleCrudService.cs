@@ -1,6 +1,6 @@
-using Dionysos.Dionysos.BL.Extensions;
-using Dionysos.Dionysos.BL.Services.ArticleServices;
-using Dionysos.Dionysos.Database.Database;
+using Dionysos.BL.Dionysos.BL.Services.ArticleServices;
+using Dionysos.Database.Database;
+using Dionysos.Extensions;
 using DionysosProtobuf;
 using Grpc.Core;
 using Article = DionysosProtobuf.Article;

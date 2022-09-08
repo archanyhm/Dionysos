@@ -1,5 +1,5 @@
 using System.Linq;
-using Dionysos.Dionysos.Database.Database;
+using Dionysos.Database.Database;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Xunit;
@@ -14,7 +14,7 @@ public class DeleteArticleTests
         var dbContextMock = new Mock<IMainDbContext>();
         SetupMock(dbContextMock, Article1);
 
-        var classUnderTest = new Dionysos.BL.Services.ArticleServices.ArticleDeletionService(dbContextMock.Object);
+        var classUnderTest = new BL.Dionysos.BL.Services.ArticleServices.ArticleDeletionService(dbContextMock.Object);
         classUnderTest.DeleteArticle(Ean);
 
         dbContextMock.Verify(x => x.SaveChanges(), Times.Once);
@@ -26,7 +26,7 @@ public class DeleteArticleTests
         var dbContextMock = new Mock<IMainDbContext>();
         SetupMock(dbContextMock, Article1);
 
-        var classUnderTest = new Dionysos.BL.Services.ArticleServices.ArticleDeletionService(dbContextMock.Object);
+        var classUnderTest = new BL.Dionysos.BL.Services.ArticleServices.ArticleDeletionService(dbContextMock.Object);
         classUnderTest.DeleteArticle(Ean);
 
         dbContextMock.Verify(x => x.Articles.Remove(It.IsAny<Article>()), Times.Once);

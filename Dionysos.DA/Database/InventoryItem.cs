@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Dionysos.Dionysos.Database.Database;
+namespace Dionysos.Database.Database;
 
 public class InventoryItem
 {

@@ -1,6 +1,6 @@
-using Dionysos.Dionysos.BL.Extensions;
-using Dionysos.Dionysos.BL.Services.VendorServices;
-using Dionysos.Dionysos.Database.Database;
+using Dionysos.BL.Dionysos.BL.Services.VendorServices;
+using Dionysos.Database.Database;
+using Dionysos.Extensions;
 using DionysosProtobuf;
 using Grpc.Core;
 using Vendor = DionysosProtobuf.Vendor;

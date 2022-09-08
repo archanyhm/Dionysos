@@ -1,12 +1,13 @@
-using Dionysos.Dionysos.BL.Dtos;
+using Dionysos.BL.Dionysos.BL.Dtos;
+using Dionysos.Database.Database;
 
-namespace Dionysos.Dionysos.BL.Extensions;
+namespace Dionysos.BL.Dionysos.BL.Extensions;
 
 public static class InventoryItemExtensions
 {
-    public static Dionysos.Database.Database.InventoryItem ToDbInventoryItem(this InventoryItemDto inventoryItemDto)
+    public static InventoryItem ToDbInventoryItem(this InventoryItemDto inventoryItemDto)
     {
-        return new Dionysos.Database.Database.InventoryItem
+        return new InventoryItem
         {
             BestBefore = inventoryItemDto.BestBefore,
             Ean = inventoryItemDto.Ean

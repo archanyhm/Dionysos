@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Dionysos.Dionysos.Database.Database;
+namespace Dionysos.Database.Database;
 
 public interface IMainDbContext
 {

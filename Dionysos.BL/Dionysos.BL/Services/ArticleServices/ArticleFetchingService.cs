@@ -1,8 +1,8 @@
-using Dionysos.Dionysos.BL.Dtos;
-using Dionysos.Dionysos.BL.Extensions;
-using Dionysos.Dionysos.Database.Database;
+using Dionysos.BL.Dionysos.BL.Dtos;
+using Dionysos.BL.Dionysos.BL.Extensions;
+using Dionysos.Database.Database;
 
-namespace Dionysos.Dionysos.BL.Services.ArticleServices;
+namespace Dionysos.BL.Dionysos.BL.Services.ArticleServices;
 
 public class ArticleFetchingService
 {

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Dionysos.Dionysos.Database.Database;
+namespace Dionysos.Database.Database;
 
 public class Article
 {
