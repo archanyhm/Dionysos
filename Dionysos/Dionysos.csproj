@@ -41,7 +41,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Dionysos.BL\Dionysos.BL.csproj" />
-      <ProjectReference Include="..\Dionysos.Database\Dionysos.Database.csproj" />
+      <ProjectReference Include="..\Dionysos.DA\Dionysos.DA.csproj" />
     </ItemGroup>
 
 

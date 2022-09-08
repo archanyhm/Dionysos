@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Dionysos.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    [Migration("20220831113057_NormalizeVendorToOwnEntity")]
-    partial class NormalizeVendorToOwnEntity
+    [Migration("20220824065702_FixedKeys")]
+    partial class FixedKeys
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,7 +28,7 @@ namespace Dionysos.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Dionysos.Database.Article", b =>
+            modelBuilder.Entity("Dionysos.DA.Article", b =>
                 {
                     b.Property<string>("Ean")
                         .HasColumnType("text");
@@ -41,17 +41,16 @@ namespace Dionysos.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("VendorId")
-                        .HasColumnType("integer");
+                    b.Property<string>("Vendor")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Ean");
-
-                    b.HasIndex("VendorId");
 
                     b.ToTable("Articles");
                 });
 
-            modelBuilder.Entity("Dionysos.Database.InventoryItem", b =>
+            modelBuilder.Entity("Dionysos.DA.InventoryItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -59,7 +58,7 @@ namespace Dionysos.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime?>("BestBefore")
+                    b.Property<DateTime>("BestBefore")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Ean")
@@ -73,41 +72,9 @@ namespace Dionysos.Migrations
                     b.ToTable("InventoryItems");
                 });
 
-            modelBuilder.Entity("Dionysos.Database.Vendor", b =>
+            modelBuilder.Entity("Dionysos.DA.InventoryItem", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CountryCode")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Vendor");
-                });
-
-            modelBuilder.Entity("Dionysos.Database.Article", b =>
-                {
-                    b.HasOne("Dionysos.Database.Vendor", "Vendor")
-                        .WithMany("Articles")
-                        .HasForeignKey("VendorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Vendor");
-                });
-
-            modelBuilder.Entity("Dionysos.Database.InventoryItem", b =>
-                {
-                    b.HasOne("Dionysos.Database.Article", "Article")
+                    b.HasOne("Dionysos.DA.Article", "Article")
                         .WithMany("InventoryItems")
                         .HasForeignKey("Ean")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -116,14 +83,9 @@ namespace Dionysos.Migrations
                     b.Navigation("Article");
                 });
 
-            modelBuilder.Entity("Dionysos.Database.Article", b =>
+            modelBuilder.Entity("Dionysos.DA.Article", b =>
                 {
                     b.Navigation("InventoryItems");
-                });
-
-            modelBuilder.Entity("Dionysos.Database.Vendor", b =>
-                {
-                    b.Navigation("Articles");
                 });
 #pragma warning restore 612, 618
         }

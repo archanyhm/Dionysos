@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dionysos", "Dionysos\Dionys
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dionysos.API.Tests", "Dionysos.API.Tests\Dionysos.API.Tests.csproj", "{9F911B7B-BC87-4FCD-A8EB-6D38B77018B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dionysos.Database", "Dionysos.Database\Dionysos.Database.csproj", "{035BB4DA-64E2-425F-8B5D-D61010CFE7DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dionysos.DA", "Dionysos.DA\Dionysos.DA.csproj", "{035BB4DA-64E2-425F-8B5D-D61010CFE7DA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientTest", "ClientTest\ClientTest.csproj", "{D842248E-907E-47BA-9C6C-7F80195DA943}"
 EndProject

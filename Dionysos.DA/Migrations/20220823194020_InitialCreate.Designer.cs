@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Dionysos.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    [Migration("20220824065702_FixedKeys")]
-    partial class FixedKeys
+    [Migration("20220823194020_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,9 +28,12 @@ namespace Dionysos.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Dionysos.Database.Article", b =>
+            modelBuilder.Entity("Dionysos.DA.Article", b =>
                 {
                     b.Property<string>("Ean")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ArticleEan")
                         .HasColumnType("text");
 
                     b.Property<string>("Description")
@@ -47,10 +50,12 @@ namespace Dionysos.Migrations
 
                     b.HasKey("Ean");
 
+                    b.HasIndex("ArticleEan");
+
                     b.ToTable("Articles");
                 });
 
-            modelBuilder.Entity("Dionysos.Database.InventoryItem", b =>
+            modelBuilder.Entity("Dionysos.DA.InventoryItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -58,7 +63,7 @@ namespace Dionysos.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("BestBefore")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Ean")
@@ -72,10 +77,17 @@ namespace Dionysos.Migrations
                     b.ToTable("InventoryItems");
                 });
 
-            modelBuilder.Entity("Dionysos.Database.InventoryItem", b =>
+            modelBuilder.Entity("Dionysos.DA.Article", b =>
                 {
-                    b.HasOne("Dionysos.Database.Article", "Article")
-                        .WithMany("InventoryItems")
+                    b.HasOne("Dionysos.DA.Article", null)
+                        .WithMany("Articles")
+                        .HasForeignKey("ArticleEan");
+                });
+
+            modelBuilder.Entity("Dionysos.DA.InventoryItem", b =>
+                {
+                    b.HasOne("Dionysos.DA.Article", "Article")
+                        .WithMany()
                         .HasForeignKey("Ean")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -83,9 +95,9 @@ namespace Dionysos.Migrations
                     b.Navigation("Article");
                 });
 
-            modelBuilder.Entity("Dionysos.Database.Article", b =>
+            modelBuilder.Entity("Dionysos.DA.Article", b =>
                 {
-                    b.Navigation("InventoryItems");
+                    b.Navigation("Articles");
                 });
 #pragma warning restore 612, 618
         }

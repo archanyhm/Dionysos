@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Dionysos.Database\Dionysos.Database.csproj" />
+      <ProjectReference Include="..\Dionysos.DA\Dionysos.DA.csproj" />
     </ItemGroup>
 
 </Project>
