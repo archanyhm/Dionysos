@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dionysos.API.Tests", "Diony
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dionysos.Database", "Dionysos.Database\Dionysos.Database.csproj", "{035BB4DA-64E2-425F-8B5D-D61010CFE7DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientTest", "ClientTest\ClientTest.csproj", "{D842248E-907E-47BA-9C6C-7F80195DA943}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,5 +24,9 @@ Global
 		{035BB4DA-64E2-425F-8B5D-D61010CFE7DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{035BB4DA-64E2-425F-8B5D-D61010CFE7DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{035BB4DA-64E2-425F-8B5D-D61010CFE7DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D842248E-907E-47BA-9C6C-7F80195DA943}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D842248E-907E-47BA-9C6C-7F80195DA943}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D842248E-907E-47BA-9C6C-7F80195DA943}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D842248E-907E-47BA-9C6C-7F80195DA943}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
