@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dionysos.Database", "Dionys
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientTest", "ClientTest\ClientTest.csproj", "{D842248E-907E-47BA-9C6C-7F80195DA943}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dionysos.BL", "Dionysos.BL\Dionysos.BL.csproj", "{3E10D486-6E94-4270-BEFF-56E432D4AD28}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,5 +30,9 @@ Global
 		{D842248E-907E-47BA-9C6C-7F80195DA943}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D842248E-907E-47BA-9C6C-7F80195DA943}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D842248E-907E-47BA-9C6C-7F80195DA943}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E10D486-6E94-4270-BEFF-56E432D4AD28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E10D486-6E94-4270-BEFF-56E432D4AD28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E10D486-6E94-4270-BEFF-56E432D4AD28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E10D486-6E94-4270-BEFF-56E432D4AD28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
