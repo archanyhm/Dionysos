@@ -1,5 +1,5 @@
 using Dionysos.Database.Database;
-using Dionysos.Dionysos.App.GrpcService;
+using Dionysos.GrpcService;
 
 var builder = WebApplication.CreateBuilder(args);
 

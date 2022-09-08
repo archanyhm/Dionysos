@@ -5,7 +5,7 @@ using DionysosProtobuf;
 using Grpc.Core;
 using Article = DionysosProtobuf.Article;
 
-namespace Dionysos.Dionysos.App.GrpcService;
+namespace Dionysos.GrpcService;
 
 public class ArticleCrudService : DionysosProtobuf.ArticleCrudService.ArticleCrudServiceBase
 {

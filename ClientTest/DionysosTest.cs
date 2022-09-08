@@ -1,6 +1,6 @@
 using DionysosProtobuf;
 using Grpc.Net.Client;
-using ArticleCrudService = Dionysos.Dionysos.App.GrpcService.ArticleCrudService;
+using ArticleCrudService = Dionysos.GrpcService.ArticleCrudService;
 
 namespace ClientTest;
 

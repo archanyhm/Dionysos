@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dionysos", "Dionysos\Dionysos.csproj", "{0AE28AD1-6200-4CCC-8BAE-E3518B14628E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dionysos.GRPC", "Dionysos.GRPC\Dionysos.GRPC.csproj", "{0AE28AD1-6200-4CCC-8BAE-E3518B14628E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dionysos.API.Tests", "Dionysos.API.Tests\Dionysos.API.Tests.csproj", "{9F911B7B-BC87-4FCD-A8EB-6D38B77018B9}"
 EndProject

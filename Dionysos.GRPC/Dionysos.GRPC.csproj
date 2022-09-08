@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <RootNamespace>Dionysos</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -30,18 +31,14 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Dionysos.App" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Protobuf Include="Dionysos.App\Protobuf\Dionysos.proto">
-            <Generator>MSBuild:Compile</Generator>
-        </Protobuf>
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Dionysos.BL\Dionysos.BL.csproj" />
       <ProjectReference Include="..\Dionysos.DA\Dionysos.DA.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Protobuf Include="Protobuf\Dionysos.proto">
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
     </ItemGroup>
 
 

@@ -18,6 +18,6 @@
 
     <ItemGroup>
         <Protobuf Include="Protobuf\Pingpong.proto" GrpcServices="Client"/>
-        <Protobuf Include="Protobuf\Dionysos.proto" GrpcServices="Client"/>
+        <Protobuf Include="Protobuf\Dionysos.GRPC.proto" GrpcServices="Client"/>
     </ItemGroup>
 </Project>

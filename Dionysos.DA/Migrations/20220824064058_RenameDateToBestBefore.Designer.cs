@@ -28,7 +28,7 @@ namespace Dionysos.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Dionysos.DA.Article", b =>
+            modelBuilder.Entity("Dionysos.GRPC.DA.Article", b =>
                 {
                     b.Property<string>("Ean")
                         .HasColumnType("text");
@@ -55,7 +55,7 @@ namespace Dionysos.Migrations
                     b.ToTable("Articles");
                 });
 
-            modelBuilder.Entity("Dionysos.DA.InventoryItem", b =>
+            modelBuilder.Entity("Dionysos.GRPC.DA.InventoryItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -77,16 +77,16 @@ namespace Dionysos.Migrations
                     b.ToTable("InventoryItems");
                 });
 
-            modelBuilder.Entity("Dionysos.DA.Article", b =>
+            modelBuilder.Entity("Dionysos.GRPC.DA.Article", b =>
                 {
-                    b.HasOne("Dionysos.DA.Article", null)
+                    b.HasOne("Dionysos.GRPC.DA.Article", null)
                         .WithMany("Articles")
                         .HasForeignKey("ArticleEan");
                 });
 
-            modelBuilder.Entity("Dionysos.DA.InventoryItem", b =>
+            modelBuilder.Entity("Dionysos.GRPC.DA.InventoryItem", b =>
                 {
-                    b.HasOne("Dionysos.DA.Article", "Article")
+                    b.HasOne("Dionysos.GRPC.DA.Article", "Article")
                         .WithMany()
                         .HasForeignKey("Ean")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -95,7 +95,7 @@ namespace Dionysos.Migrations
                     b.Navigation("Article");
                 });
 
-            modelBuilder.Entity("Dionysos.DA.Article", b =>
+            modelBuilder.Entity("Dionysos.GRPC.DA.Article", b =>
                 {
                     b.Navigation("Articles");
                 });

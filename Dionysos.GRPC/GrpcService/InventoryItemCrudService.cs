@@ -5,7 +5,7 @@ using DionysosProtobuf;
 using Grpc.Core;
 using InventoryItem = DionysosProtobuf.InventoryItem;
 
-namespace Dionysos.Dionysos.App.GrpcService;
+namespace Dionysos.GrpcService;
 
 public class InventoryItemCrudService : DionysosProtobuf.InventoryItemCrudService.InventoryItemCrudServiceBase
 {

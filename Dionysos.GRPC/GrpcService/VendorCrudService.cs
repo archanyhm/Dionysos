@@ -5,7 +5,7 @@ using DionysosProtobuf;
 using Grpc.Core;
 using Vendor = DionysosProtobuf.Vendor;
 
-namespace Dionysos.Dionysos.App.GrpcService;
+namespace Dionysos.GrpcService;
 
 public class VendorCrudService : DionysosProtobuf.VendorCrudService.VendorCrudServiceBase
 {

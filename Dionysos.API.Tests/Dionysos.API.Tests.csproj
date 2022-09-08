@@ -24,7 +24,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Dionysos.BL\Dionysos.BL.csproj" />
-        <ProjectReference Include="..\Dionysos\Dionysos.csproj" />
+        <ProjectReference Include="..\Dionysos.GRPC\Dionysos.GRPC.csproj" />
     </ItemGroup>
 
 </Project>
