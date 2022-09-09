@@ -1,0 +1,18 @@
+name: remote ssh command
+on:
+  push:
+    tags:
+    - '*'
+jobs:
+  build:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Pull, build and run the 
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script: cd app/dionysos; git pull; cd Dionysos; buildah build . -t dionysos:latest; podman rm $(podman stop $(podman ps -a -q --filter ancestor=dionysos_api --format="{{.ID}}")); podman run dionysos_api -d;
