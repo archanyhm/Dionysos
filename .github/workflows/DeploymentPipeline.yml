@@ -15,4 +15,4 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-        script: cd app/dionysos; git pull; cd Dionysos; buildah build . -t dionysos:latest; podman rm $(podman stop $(podman ps -a -q --filter ancestor=dionysos_api --format="{{.ID}}")); podman run dionysos_api -d;
+        script: cd app/dionysos; git pull; cd Dionysos; buildah build -t dionysos:latest .; podman rm $(podman stop $(podman ps -a -q --filter ancestor=dionysos_api --format="{{.ID}}")); podman run dionysos_api -d;
