@@ -1,3 +1,4 @@
+using Dionysos.CustomExceptions;
 using Dionysos.Database;
 using Dionysos.Dtos;
 using Dionysos.Extensions;
@@ -13,19 +14,27 @@ public class InventoryItemFetchingService
         _dbContext = dbContext;
     }
 
-    public List<InventoryItemDto> FetchItems()
+    public IEnumerable<InventoryItemDto> FetchItems()
     {
         var items = _dbContext.InventoryItems.ToList();
+        if (!items.Any()) throw new ObjectDoesNotExistException();
 
         return items.Select(x => x.ToInventoryItemDto()).ToList();
     }
 
     public InventoryItemDto FetchItem(int id)
     {
-        var item = _dbContext.InventoryItems
-            .Where(x => x.Id == id)
-            .Select(x => x.ToInventoryItemDto())
-            .Single();
-        return item;
+        try
+        {
+            var item = _dbContext.InventoryItems
+                .Where(x => x.Id == id)
+                .Select(x => x.ToInventoryItemDto())
+                .Single();
+            return item;
+        }
+        catch (ArgumentNullException e)
+        {
+            throw new ObjectDoesNotExistException();
+        }
     }
 }
