@@ -18,9 +18,9 @@ if (!app.Environment.IsDevelopment())
 }
 
 
-app.MapGrpcService<ArticleCrudService>();
-app.MapGrpcService<InventoryItemCrudService>();
-app.MapGrpcService<VendorCrudService>();
+app.MapGrpcService<ArticleService>();
+app.MapGrpcService<InventoryItemService>();
+app.MapGrpcService<VendorService>();
 
 
 app.Run();
