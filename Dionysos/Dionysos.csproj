@@ -21,9 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Protobuf Include="Protobuf/Pingpong.proto" GrpcServices="Server" />
         <Protobuf Include="Protobuf/Dionysos.proto" GrpcServices="Server" />
     </ItemGroup>
-
 
 </Project>

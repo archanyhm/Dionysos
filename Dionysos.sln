@@ -4,8 +4,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dionysos", "Dionysos\Dionys
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dionysos.API.Tests", "Dionysos.API.Tests\Dionysos.API.Tests.csproj", "{9F911B7B-BC87-4FCD-A8EB-6D38B77018B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PingpongClient", "PingpongClient\PingpongClient.csproj", "{090C1645-D1F9-4BE8-881C-FB9F652B2126}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -16,10 +14,6 @@ Global
 		{0AE28AD1-6200-4CCC-8BAE-E3518B14628E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AE28AD1-6200-4CCC-8BAE-E3518B14628E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AE28AD1-6200-4CCC-8BAE-E3518B14628E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{090C1645-D1F9-4BE8-881C-FB9F652B2126}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{090C1645-D1F9-4BE8-881C-FB9F652B2126}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{090C1645-D1F9-4BE8-881C-FB9F652B2126}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{090C1645-D1F9-4BE8-881C-FB9F652B2126}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9F911B7B-BC87-4FCD-A8EB-6D38B77018B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9F911B7B-BC87-4FCD-A8EB-6D38B77018B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
