@@ -72,10 +72,10 @@ public class FetchArticlesTests
     #region TestData
 
     private static readonly Article Article1 = new()
-        { Ean = "1", Description = "someDesc1", Name = "someName1", VendorId = 1 };
+    { Ean = "1", Description = "someDesc1", Name = "someName1", VendorId = 1 };
 
     private static readonly Article Article2 = new()
-        { Ean = "2", Description = "someDesc2", Name = "someName2", VendorId = 2 };
+    { Ean = "2", Description = "someDesc2", Name = "someName2", VendorId = 2 };
 
     private readonly ArticleDto _expectedArticleDto1 =
         new() { Description = "someDesc1", Ean = "1", Name = "someName1", VendorId = 1 };

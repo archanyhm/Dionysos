@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Dionysos.Database;
@@ -13,15 +14,13 @@ namespace Dionysos.API.Tests.ArticleFetchingServiceTests;
 public class FetchArticleTests
 {
     [Fact]
-    public void ArticleNotInDb_EmptyArticle()
+    public void ArticleNotInDb_ExceptionThrown()
     {
-        var expected = _emptyArticleDto;
         var dbContextMock = GetDbMock();
 
         var classUnderTest = new ArticleFetchingService(dbContextMock.Object);
-        var actual = classUnderTest.FetchArticle("I do not exist");
 
-        actual.Should().BeEquivalentTo(expected);
+        Assert.Throws<InvalidOperationException>(() => classUnderTest.FetchArticle("I do not exist"));
     }
 
     [Fact]
@@ -61,13 +60,13 @@ public class FetchArticleTests
     private const string Article1Ean = "1";
 
     private static readonly Article Article1 = new()
-        { Ean = Article1Ean, Description = "someDesc1", Name = "someName1", VendorId = 1 };
+    { Ean = Article1Ean, Description = "someDesc1", Name = "someName1", VendorId = 1 };
 
     private static readonly Article Article2 = new()
-        { Ean = "2", Description = "someDesc2", Name = "someName2", VendorId = 2 };
+    { Ean = "2", Description = "someDesc2", Name = "someName2", VendorId = 2 };
 
     private readonly ArticleDto _expectedArticleDto1 = new()
-        { Description = "someDesc1", Ean = Article1Ean, Name = "someName1", VendorId = 1 };
+    { Description = "someDesc1", Ean = Article1Ean, Name = "someName1", VendorId = 1 };
 
     private readonly ArticleDto _emptyArticleDto = new();
 
